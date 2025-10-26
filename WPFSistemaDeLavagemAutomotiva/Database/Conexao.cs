@@ -1,0 +1,25 @@
+﻿using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace WPFSistemaDeLavagemAutomotiva.Database
+{
+    public class Conexao
+    {
+        private static string servidor = "localhost";
+        private static string banco = "db_lavagem";
+        private static string usuario = "root";
+        private static string senha = "agi9]d8y6G&`";
+        private static string stringDeConexao = $"server={servidor};database={banco};user{usuario};password={senha};";
+
+        public static MySqlConnection ObterConexao()
+        {
+            return new MySqlConnection(stringDeConexao);
+        }
+    }
+}
