@@ -39,6 +39,8 @@ namespace WPFSistemaDeLavagemAutomotiva.Models
             set { _horaAgendamento = value; }
         }
 
+        public Agendamento() { }
+
         public Agendamento(int idAgendamento, Cliente cliente, Servico servico, DateTime dataAgendada, DateTime horaAgendamento)
         {
             this._idAgendamento = idAgendamento;
@@ -46,11 +48,6 @@ namespace WPFSistemaDeLavagemAutomotiva.Models
             this._servico = servico;
             this._dataAgendada = dataAgendada;
             this._horaAgendamento = horaAgendamento;
-        }
-
-        public Agendamento()
-        {
-
         }
     }
 }
