@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFSistemaDeLavagemAutomotiva.Database;
 
 namespace WPFSistemaDeLavagemAutomotiva
 {
@@ -23,6 +24,20 @@ namespace WPFSistemaDeLavagemAutomotiva
         public MainWindow()
         {
             InitializeComponent();
+
+            try
+            {
+                using (var conexao = Conexao.ObterConexao())
+                {
+                    conexao.Open();
+                    MessageBox.Show("Conexão bem-sucedida ao banco de dados!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao conectar ao banco de dados: " + ex.Message);
+            }
+
         }
     }
 }
