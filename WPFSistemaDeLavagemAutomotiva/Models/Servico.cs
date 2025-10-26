@@ -14,26 +14,26 @@ namespace WPFSistemaDeLavagemAutomotiva.Models
             get { return _idServico; }
             set { _idServico = value; }
         }
-        private string _nomeServico;
-        public string NomeServico
+        private string _servico;
+        public string nomeServico
         {
-            get { return _nomeServico; }
-            set { _nomeServico = value; }
+            get { return _servico; }
+            set { _servico = value; }
         }
-        private decimal _precoServico;
-        public decimal PrecoServico
+        private decimal _valor;
+        public decimal Valor
         {
-            get { return _precoServico; }
-            set { _precoServico = value; }
+            get { return _valor; }
+            set { _valor = value; }
         }
 
         public Servico(){ }
 
-        public Servico(int idServico, string nomeServico, decimal precoServico)
+        public Servico(int idServico, string servico, decimal valor)
         {
             this._idServico = idServico;
-            this._nomeServico = nomeServico;
-            this._precoServico = precoServico;
+            this._servico = servico;
+            this._valor = valor;
         }
     }
 }
