@@ -112,14 +112,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DAO\AgendamentoDAOImpl.cs" />
+    <Compile Include="DAO\AgendamentoDAOI.cs" />
     <Compile Include="DAO\ClienteDAO.cs" />
-    <Compile Include="DAO\ClienteDAOImpl.cs" />
+    <Compile Include="DAO\ClienteDAOI.cs" />
     <Compile Include="DAO\FuncionarioDAO.cs" />
-    <Compile Include="DAO\FuncionarioDAOImpl.cs" />
+    <Compile Include="DAO\FuncionarioDAOI.cs" />
     <Compile Include="DAO\AgendamentoDAO.cs" />
     <Compile Include="DAO\ServicoDAO.cs" />
-    <Compile Include="DAO\ServicoDAOImpl.cs" />
+    <Compile Include="DAO\ServicoDAOI.cs" />
     <Compile Include="Database\Conexao.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

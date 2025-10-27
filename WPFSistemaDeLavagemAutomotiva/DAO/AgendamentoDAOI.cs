@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class AgendamentoDAOImpl
+    public class AgendamentoDAOI
     {
     }
 }
