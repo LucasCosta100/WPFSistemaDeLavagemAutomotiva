@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,7 +14,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Database
         private static string servidor = "localhost";
         private static string banco = "db_lavagem";
         private static string usuario = "root";
-        private static string senha = "LuC@s271656";
+        private static string senha = "lucas1234";
         private static string stringDeConexao = $"server={servidor};user id = {usuario}; password={senha};database={banco};";
 
         public static MySqlConnection ObterConexao()
