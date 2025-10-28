@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using WPFSistemaDeLavagemAutomotiva.Database;
 using WPFSistemaDeLavagemAutomotiva.Models;
-using MySqlConnector;
+using MySql.Data.MySqlClient;
+
+
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
