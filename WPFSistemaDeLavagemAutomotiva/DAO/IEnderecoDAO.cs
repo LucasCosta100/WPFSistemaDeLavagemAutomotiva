@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPFSistemaDeLavagemAutomotiva.Models
+namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class Endereco
+    internal interface IEnderecoDAO
     {
     }
 }

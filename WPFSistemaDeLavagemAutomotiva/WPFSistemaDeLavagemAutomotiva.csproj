@@ -126,10 +126,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DAO\ClienteDAO.cs" />
+    <Compile Include="DAO\EnderecoDAO.cs" />
     <Compile Include="DAO\FuncionarioDAO.cs" />
     <Compile Include="DAO\AgendamentoDAO.cs" />
     <Compile Include="DAO\IAgendamentoDAO.cs" />
     <Compile Include="DAO\IClienteDAO.cs" />
+    <Compile Include="DAO\IEnderecoDAO.cs" />
     <Compile Include="DAO\IFuncionarioDAO.cs" />
     <Compile Include="DAO\IServicoDAO.cs" />
     <Compile Include="DAO\ServicoDAO.cs" />

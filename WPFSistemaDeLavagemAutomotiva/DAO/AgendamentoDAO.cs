@@ -52,7 +52,8 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     cmd.Parameters.AddWithValue("@hora", agendamento.HoraAgendamento);
                     cmd.Parameters.AddWithValue("@status", agendamento.StatusServico);
                     cmd.Parameters.AddWithValue("@valor", agendamento.ValorTotal);
- 
+                    cmd.Parameters.AddWithValue("@id", agendamento.IdAgendamento);
+
                     conn.Open();
                     cmd.ExecuteNonQuery();
                 }
