@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace WPFSistemaDeLavagemAutomotiva.Models
 {
-    public class Agendamento
-    {
+   public class Agendamento
+   {
         private int _idAgendamento;
-        public int IdAgendamento { 
+        public int IdAgendamento
+        {
             get { return _idAgendamento; }
             set { _idAgendamento = value; }
         }
@@ -32,22 +33,38 @@ namespace WPFSistemaDeLavagemAutomotiva.Models
             set { _dataAgendada = value; }
         }
 
-        private DateTime _horaAgendamento;
-        public DateTime HoraAgendamento
+        private TimeSpan _horaAgendamento;
+        public TimeSpan HoraAgendamento
         {
             get { return _horaAgendamento; }
             set { _horaAgendamento = value; }
         }
 
+        private string _statusServico;
+        public string StatusServico
+        {
+            get { return _statusServico; }
+            set { _statusServico = value; }
+        }
+
+        private double _valorTotal;
+        public double ValorTotal
+        {
+            get { return _valorTotal; }
+            set { _valorTotal = value; }
+        }
+
         public Agendamento() { }
 
-        public Agendamento(int idAgendamento, Cliente cliente, Servico servico, DateTime dataAgendada, DateTime horaAgendamento)
+        public Agendamento(int idAgendamento, Cliente cliente, Servico servico, DateTime dataAgendada, TimeSpan horaAgendamento, string statusServico, double valorTotal)
         {
             this._idAgendamento = idAgendamento;
             this._cliente = cliente;
             this._servico = servico;
             this._dataAgendada = dataAgendada;
             this._horaAgendamento = horaAgendamento;
+            this._statusServico = statusServico;
+            this._valorTotal = valorTotal;
         }
     }
 }
