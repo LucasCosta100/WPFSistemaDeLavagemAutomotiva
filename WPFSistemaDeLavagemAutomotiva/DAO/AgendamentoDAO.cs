@@ -11,7 +11,7 @@ using MySqlConnector;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class AgendamentoDAO
+    public class AgendamentoDAO : IAgendamentoDAO
     {
         public void salvar(Agendamento agendamento)
         {

@@ -15,7 +15,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Models
             set { _idServico = value; }
         }
         private string _servico;
-        public string nomeServico
+        public string NomeServico
         {
             get { return _servico; }
             set { _servico = value; }

@@ -8,7 +8,7 @@ using WPFSistemaDeLavagemAutomotiva.Models;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class FuncionarioDAO
+    public class FuncionarioDAO : IFuncionarioDAO
     {
         public void salvar(Funcionario funcionario)
         {
@@ -60,7 +60,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                 using (MySqlConnector.MySqlConnection conn = Database.Conexao.ObterConexao())
                 {
                     string sql = "DELETE FROM funcionarios WHERE id_funcionario = @id";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    MySqlConnector.MySqlCommand cmd = new MySqlConnector.MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@id", funcionario.IdFuncionario);
                     conn.Open();
                     cmd.ExecuteNonQuery();
