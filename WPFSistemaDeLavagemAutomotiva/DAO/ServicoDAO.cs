@@ -7,7 +7,7 @@ using WPFSistemaDeLavagemAutomotiva.Models;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class ServicoDAO : IServicoDAO
+    public class ServicoDAO
     {
         public void salvar(Servico servico)
         {
@@ -24,7 +24,8 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     cmd.ExecuteNonQuery();
                 }
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception("Erro ao salvar serviço: " + ex.Message);
             }
@@ -69,4 +70,5 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                 throw new Exception("Erro ao deletar serviço: " + ex.Message);
             }
         }
+    }
 }

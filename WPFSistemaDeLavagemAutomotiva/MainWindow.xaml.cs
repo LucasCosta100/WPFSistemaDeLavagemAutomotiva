@@ -12,7 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFSistemaDeLavagemAutomotiva.DAO;
 using WPFSistemaDeLavagemAutomotiva.Database;
+using WPFSistemaDeLavagemAutomotiva.Models;
 
 namespace WPFSistemaDeLavagemAutomotiva
 {
@@ -25,19 +27,10 @@ namespace WPFSistemaDeLavagemAutomotiva
         {
             InitializeComponent();
 
-            try
-            {
-                using (var conexao = Conexao.ObterConexao())
-                {
-                    conexao.Open();
-                    MessageBox.Show("Conexão bem-sucedida ao banco de dados!");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro ao conectar ao banco de dados: " + ex.Message);
-            }
-
+           
+            ClienteDAO clienteDAO = new ClienteDAO();
+            var client = clienteDAO.buscarPorCodigo(1);
+            MessageBox.Show("Cliente encontrado: " + client.Nome);
         }
     }
 }

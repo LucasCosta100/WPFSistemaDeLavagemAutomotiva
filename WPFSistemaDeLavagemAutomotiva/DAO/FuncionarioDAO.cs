@@ -1,14 +1,16 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using WPFSistemaDeLavagemAutomotiva.Database;
 using WPFSistemaDeLavagemAutomotiva.Models;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class FuncionarioDAO : IFuncionarioDAO
+    public class FuncionarioDAO
     {
         public void salvar(Funcionario funcionario)
         {
@@ -69,6 +71,69 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             catch (Exception ex)
             {
                 throw new Exception("Erro ao deletar funcionário: " + ex.Message);
+            }
+        }
+
+        public Funcionario buscarPorCodigo(int idFuncionario)
+        {
+            try
+            {
+                using (MySqlConnection conn = Conexao.ObterConexao())
+                {
+                    string sql = "SELECT * FROM funcionario WHERE id_funcionario = @id";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@id", idFuncionario);
+
+                    conn.Open();
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            Funcionario func = new Funcionario
+                            (
+                                reader.GetInt32("id_funcionario"),
+                                reader.GetString("nome"),
+                                reader.GetString("cargo")
+                            );
+                            return func;
+                        }
+                        else
+                        {
+                            return null; // Funcionário não encontrado
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao buscar funcionário por código: " + ex.Message);
+            }
+        }
+
+        public List<Funcionario> buscarTodos()
+        {
+            List<Funcionario> funcionarios = new List<Funcionario>();
+
+            using (MySqlConnection conn = Conexao.ObterConexao())
+            {
+                String sql = "SELECT * FROM funcionarios";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                conn.Open();
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Funcionario func = new Funcionario
+                        (
+                            reader.GetInt32("id_funcionario"),
+                            reader.GetString("nome"),
+                            reader.GetString("cargo")
+                        );
+                    }
+                    return funcionarios;
+                }
             }
         }
     }
