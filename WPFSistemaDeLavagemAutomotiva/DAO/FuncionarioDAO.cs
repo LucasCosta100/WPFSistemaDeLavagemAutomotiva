@@ -8,7 +8,7 @@ using WPFSistemaDeLavagemAutomotiva.Models;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class FuncionarioDAO : IFuncionarioDAO
+    public class FuncionarioDAO 
     {
         public void salvar(Funcionario funcionario)
         {

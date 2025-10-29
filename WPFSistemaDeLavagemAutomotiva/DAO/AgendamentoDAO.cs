@@ -83,5 +83,28 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                 throw new Exception("Erro ao deletar agendamento: " + ex.Message);
             }
         }
+
+        public Agendamento buscarPorCodigo(Agendamento agendamento)
+        {
+            try
+            {
+                using (MySqlConnection conn = Conexao.ObterConexao())
+                {
+                    string sql = "SELECT * FROM agendamentos WHERE id_agendamento = @id";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@id", agendamento.IdAgendamento);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        agendamento.IdAgendamento = reader.GetInt32("id_agendamento");
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao selecionar tabela " + ex.Message);
+            }
+        }
     }
 }

@@ -9,7 +9,7 @@ using WPFSistemaDeLavagemAutomotiva.Models;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class ClienteDAO : IClienteDAO
+    public class ClienteDAO 
     {
         public void salvar(Cliente cliente)
         {
