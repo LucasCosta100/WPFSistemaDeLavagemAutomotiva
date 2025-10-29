@@ -28,6 +28,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     cmd.Parameters.AddWithValue("@status", "Pendente");
                     cmd.Parameters.AddWithValue("@valor", agendamento.ServicoAgendado.Valor);
                     cmd.Parameters.AddWithValue("@ativo", true);
+                    
 
                     conn.Open();
                     cmd.ExecuteNonQuery();

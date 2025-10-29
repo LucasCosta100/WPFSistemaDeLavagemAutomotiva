@@ -18,11 +18,12 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
-                    string sql = "INSERT INTO funcionarios (id_funcionario, nome, cargo, ativo) VALUES (@id, @nome, @cargo, @ativo)";
+                    string sql = "INSERT INTO funcionarios (id_funcionario, nome, cargo, ativo, id_endereco) VALUES (@id, @nome, @cargo, @ativo, @endereco)";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@nome", funcionario.Nome);
                     cmd.Parameters.AddWithValue("@cargo", funcionario.Cargo);
                     cmd.Parameters.AddWithValue("@ativo", true);
+                    cmd.Parameters.AddWithValue("@endereco", funcionario.Endereco.IdEndereco);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -40,12 +41,13 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
-                    string sql = "UPDATE funcionarios SET nome = @nome, cargo = @cargo, ativo = @ativo WHERE id_funcionario = @id";
+                    string sql = "UPDATE funcionarios SET nome = @nome, cargo = @cargo, ativo = @ativo, id_endereco = @endereco WHERE id_funcionario = @id";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@nome", funcionario.Nome);
                     cmd.Parameters.AddWithValue("@cargo", funcionario.Cargo);
                     cmd.Parameters.AddWithValue("@id", funcionario.IdFuncionario);
                     cmd.Parameters.AddWithValue("@ativo", funcionario.Ativo);
+                    cmd.Parameters.AddWithValue("@endereco", funcionario.Endereco.IdEndereco);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -83,6 +85,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
+                    EnderecoDAO enderecoDAO = new EnderecoDAO();
                     string sql = "SELECT * FROM funcionario WHERE id_funcionario = @id";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@id", idFuncionario);
@@ -98,7 +101,9 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                                 IdFuncionario = reader.GetInt32("id_funcionario"),
                                 Nome = reader.GetString("nome"),
                                 Cargo = reader.GetString("cargo"),
-                                Ativo = reader.GetBoolean("ativo")
+                                Ativo = reader.GetBoolean("ativo"),
+                                Endereco = enderecoDAO.buscarPorCodigo(reader.GetInt32("id_endereco"))
+
                             };
                             return func;
                         }
@@ -121,6 +126,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
 
             using (MySqlConnection conn = Conexao.ObterConexao())
             {
+                EnderecoDAO enderecoDAO = new EnderecoDAO();
                 String sql = "SELECT * FROM funcionarios";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
@@ -134,7 +140,8 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                             IdFuncionario = reader.GetInt32("id_funcionario"),
                             Nome = reader.GetString("nome"),
                             Cargo = reader.GetString("cargo"),
-                            Ativo = reader.GetBoolean("ativo")
+                            Ativo = reader.GetBoolean("ativo"),
+                            Endereco = enderecoDAO.buscarPorCodigo(reader.GetInt32("id_endereco"))
                         };
                     }
                     return funcionarios;

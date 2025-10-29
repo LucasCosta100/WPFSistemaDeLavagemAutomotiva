@@ -44,18 +44,27 @@ namespace WPFSistemaDeLavagemAutomotiva.Models
             set { _ativo = value; }
         }
 
+        private Endereco _endereco;
+        public Endereco EnderecoCliente
+        {
+            get { return _endereco; }
+            set { _endereco = value; }
+        }
+
+
         public Cliente()
         {
 
         }
         
-        public Cliente(int idCliente, string nome, string email, string telefone, bool ativo)
+        public Cliente(int idCliente, string nome, string email, string telefone, bool ativo, Endereco endereco)
         {
             this._idCliente = idCliente;
             this._nome = nome;
             this._email = email;
             this._telefone = telefone;
             this._ativo = ativo;
+            this._endereco = endereco;
         }
     }
 }
