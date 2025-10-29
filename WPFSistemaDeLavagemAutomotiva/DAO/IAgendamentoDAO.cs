@@ -12,7 +12,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
         void salvar(Agendamento agendamento);
         void atualizar(Agendamento agendamento);
         void deletar(Agendamento agendamento);
-        Agendamento buscarPorcodigo(Agendamento agendamento);
+        Agendamento buscarPorcodigo(int idAgendamento);
         List<Agendamento> buscarTodos();
     }
 }

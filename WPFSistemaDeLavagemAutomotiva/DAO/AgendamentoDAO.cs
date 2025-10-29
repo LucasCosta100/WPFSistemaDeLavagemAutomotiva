@@ -11,7 +11,7 @@ using MySqlConnector;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class AgendamentoDAO : IAgendamentoDAO
+    public class AgendamentoDAO 
     {
         public void salvar(Agendamento agendamento)
         {
@@ -84,7 +84,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public Agendamento buscarPorCodigo(Agendamento agendamento)
+        public Agendamento buscarPorCodigo(int idAgendamento)
         {
             try
             {
@@ -92,11 +92,27 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                 {
                     string sql = "SELECT * FROM agendamentos WHERE id_agendamento = @id";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@id", agendamento.IdAgendamento);
+                    cmd.Parameters.AddWithValue("@id", idAgendamento);
 
+                    conn.Open();
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        agendamento.IdAgendamento = reader.GetInt32("id_agendamento");
+                        if (reader.Read())
+                        {
+                            Agendamento agendamento = new Agendamento()
+                            {
+                                IdAgendamento = reader.GetInt32(reader.GetOrdinal("id_agendamento")),
+                                DataAgendada = reader.GetDateTime(reader.GetOrdinal("data_agendamento")),
+                                HoraAgendamento = reader.GetTimeSpan(reader.GetOrdinal("hora_agendamento")),
+                                StatusServico = reader.GetString(reader.GetOrdinal("status_servico")),
+                                ValorTotal = reader.GetDouble(reader.GetOrdinal("valor_total"))
+                            };
+                            return agendamento;
+                        }
+                        else
+                        {
+                            return null;
+                        }
                     }
 
                 }
@@ -106,5 +122,32 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                 throw new Exception("Erro ao selecionar tabela " + ex.Message);
             }
         }
+
+        public List<Agendamento> buscarTodos()
+        {
+            List<Agendamento> agendamentos = new List<Agendamento>();
+            try
+            {
+                using(MySqlConnection conn = Conexao.ObterConexao())
+                {
+                    string sql = "SELECT * FROM agendamentos ";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    conn.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Agendamento agendamento = new Agendamento()
+                            {
+
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao buscar todos os agendamentos: " + ex.Message);
+            }
     }
 }
