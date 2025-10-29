@@ -73,6 +73,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                 throw new Exception("Erro ao deletar serviço: " + ex.Message);
             }
         }
+<<<<<<< HEAD
 
         public Servico buscarPorCodigo(int idServico)
         {
@@ -140,5 +141,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                 throw new Exception("Erro ao selecionar tabela " + ex.Message);
             }
         }
+=======
+>>>>>>> c03e0240500c1fbbf36ef5907a2ce8898bfe2a90
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MySqlConnector;
+using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,11 @@ using WPFSistemaDeLavagemAutomotiva.Models;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
+<<<<<<< HEAD
     public class ClienteDAO 
+=======
+    public class ClienteDAO
+>>>>>>> c03e0240500c1fbbf36ef5907a2ce8898bfe2a90
     {
         public void salvar(Cliente cliente)
         {
@@ -75,6 +80,75 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             catch (Exception ex)
             {
                 throw new Exception("Erro ao deletar cliente: " + ex.Message);
+            }
+        }
+
+        public Cliente buscarPorCodigo(int idCliente)
+        {
+            try
+            {
+                using (MySqlConnection conn = Conexao.ObterConexao())
+                {
+                    string sql = "SELECT * FROM clientes WHERE id_cliente = @id";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@id", idCliente);
+
+                    conn.Open();
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            Cliente client = new Cliente
+                            (
+                                reader.GetInt32(reader.GetOrdinal("id_cliente")),
+                                reader.GetString(reader.GetOrdinal("nome")),
+                                reader.GetString(reader.GetOrdinal("email")),
+                                reader.GetString(reader.GetOrdinal("telefone"))
+                            );
+                            return client;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao buscar cliente por código: " + ex.Message);
+            }
+            return null;
+        }
+
+        public List<Cliente> buscarTodos()
+        {
+            List<Cliente> clientes = new List<Cliente>();
+            try
+            {
+                using (MySqlConnection conn = Conexao.ObterConexao())
+                {
+                    string sql = "SELECT * FROM clientes";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                    conn.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Cliente client = new Cliente
+                            (
+                                reader.GetInt32("id_cliente"),
+                                reader.GetString("nome"),
+                                reader.GetString("email"),
+                                reader.GetString("telefone")
+                            );
+                            clientes.Add(client);
+                        }
+                        return clientes;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao buscar todos os clientes: " + ex.Message);
             }
         }
     }
