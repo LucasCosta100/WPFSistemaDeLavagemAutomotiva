@@ -13,7 +13,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
     public class AgendamentoDAO : IAgendamentoDAO
     {
-        public void salvar(Agendamento agendamento)
+        public void Salvar(Agendamento agendamento)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void atualizar (Agendamento agendamento)
+        public void Atualizar (Agendamento agendamento)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void desativar(Agendamento agendamento)
+        public void Desativar(Agendamento agendamento)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public Agendamento buscarPorCodigo(int idAgendamento)
+        public Agendamento BuscarPorCodigo(int idAgendamento)
         {
             try
             {
@@ -108,12 +108,12 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                             Agendamento agendamento = new Agendamento()
                             {
                                 IdAgendamento = reader.GetInt32(reader.GetOrdinal("id_agendamento")),
-                                ClienteAgendado = clienteDAO.buscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_cliente"))),
-                                ServicoAgendado = servicoDAO.buscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_servico"))),
+                                ClienteAgendado = clienteDAO.BuscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_cliente"))),
+                                ServicoAgendado = servicoDAO.BuscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_servico"))),
                                 DataAgendada = reader.GetDateTime(reader.GetOrdinal("data_agendamento")),
                                 HoraAgendamento = reader.GetTimeSpan(reader.GetOrdinal("hora_agendamento")),
                                 StatusServico = reader.GetString(reader.GetOrdinal("status_servico")),
-                                ValorTotal = reader.GetDouble(reader.GetOrdinal("valor_total"))
+                                ValorTotal = reader.GetDouble(reader.GetOrdinal("valor_total")),
                                 Ativo = reader.GetBoolean(reader.GetOrdinal("ativo"))
                             };
                             return agendamento;
@@ -132,7 +132,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public List<Agendamento> buscarTodos()
+        public List<Agendamento> BuscarTodos()
         {
             List<Agendamento> agendamentos = new List<Agendamento>();
             ClienteDAO clienteDAO = new ClienteDAO();
@@ -152,12 +152,12 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                             Agendamento agendamento = new Agendamento()
                             {
                                 IdAgendamento = reader.GetInt32(reader.GetOrdinal("id_agendamento")),
-                                ClienteAgendado = clienteDAO.buscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_cliente"))),
-                                ServicoAgendado = servicoDAO.buscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_servico"))),
+                                ClienteAgendado = clienteDAO.BuscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_cliente"))),
+                                ServicoAgendado = servicoDAO.BuscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_servico"))),
                                 DataAgendada = reader.GetDateTime(reader.GetOrdinal("data_agendamento")),
                                 HoraAgendamento = reader.GetTimeSpan(reader.GetOrdinal("hora_agendamento")),
                                 StatusServico = reader.GetString(reader.GetOrdinal("status_servico")),
-                                ValorTotal = reader.GetDouble(reader.GetOrdinal("valor_total"))
+                                ValorTotal = reader.GetDouble(reader.GetOrdinal("valor_total")),
                                 Ativo = reader.GetBoolean(reader.GetOrdinal("ativo"))
                             };
                             agendamentos.Add(agendamento);

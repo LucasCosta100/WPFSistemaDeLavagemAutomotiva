@@ -9,10 +9,10 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
     public interface IServicoDAO
     {
-        void salvar(Servico servico);
-        void atualizar(Servico servico);
-        void desativar(Servico servico);
-        Servico buscarPorCodigo(int idServico);
-        List<Servico> buscarTodos();
+        void Salvar(Servico servico);
+        void Atualizar(Servico servico);
+        void Desativar(Servico servico);
+        Servico BuscarPorCodigo(int idServico);
+        List<Servico> BuscarTodos();
     }
 }

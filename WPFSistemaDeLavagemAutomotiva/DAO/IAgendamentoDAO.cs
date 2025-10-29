@@ -9,10 +9,10 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
     public interface IAgendamentoDAO
     {
-        void salvar(Agendamento agendamento);
-        void atualizar(Agendamento agendamento);
-        void desativar(Agendamento agendamento);
-        Agendamento buscarPorCodigo(int idAgendamento);
-        List<Agendamento> buscarTodos();
+        void Salvar(Agendamento agendamento);
+        void Atualizar(Agendamento agendamento);
+        void Desativar(Agendamento agendamento);
+        Agendamento BuscarPorCodigo(int idAgendamento);
+        List<Agendamento> BuscarTodos();
     }
 }

@@ -13,7 +13,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
     public class ClienteDAO : IClienteDAO
     {
-        public void salvar(Cliente cliente)
+        public void Salvar(Cliente cliente)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void atualizar(Cliente cliente)
+        public void Atualizar(Cliente cliente)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void desativar(Cliente cliente)
+        public void Desativar(Cliente cliente)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public Cliente buscarPorCodigo(int idCliente)
+        public Cliente BuscarPorCodigo(int idCliente)
         {
             try
             {
@@ -105,7 +105,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                                 Email = reader.GetString(reader.GetOrdinal("email")),
                                 Telefone = reader.GetString(reader.GetOrdinal("telefone")),
                                 Ativo = reader.GetBoolean(reader.GetOrdinal("ativo")),
-                                EnderecoCliente = enderecoDAO.buscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_endereco")))
+                                EnderecoCliente = enderecoDAO.BuscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_endereco")))
                             };
                             return client;
                         }
@@ -119,7 +119,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             return null;
         }
 
-        public List<Cliente> buscarTodos()
+        public List<Cliente> BuscarTodos()
         {
             List<Cliente> clientes = new List<Cliente>();
             try
@@ -142,7 +142,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                                 Email = reader.GetString(reader.GetOrdinal("email")),
                                 Telefone = reader.GetString(reader.GetOrdinal("telefone")),
                                 Ativo = reader.GetBoolean(reader.GetOrdinal("ativo")),
-                                EnderecoCliente = enderecoDAO.buscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_endereco")))
+                                EnderecoCliente = enderecoDAO.BuscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_endereco")))
                             };
                             clientes.Add(client);
                         }

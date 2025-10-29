@@ -11,7 +11,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
     public class EnderecoDAO
     {
-        public void salvar(Endereco endereco)
+        public void Salvar(Endereco endereco)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void atualizar(Endereco endereco)
+        public void Atualizar(Endereco endereco)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void desativar(Endereco endereco)
+        public void Desativar(Endereco endereco)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public Endereco buscarPorCodigo(int idEndereco)
+        public Endereco BuscarPorCodigo(int idEndereco)
         {
             try
             {
@@ -122,7 +122,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public List<Endereco> listarTodos()
+        public List<Endereco> ListarTodos()
         {
             List<Endereco> enderecos = new List<Endereco>();
             try

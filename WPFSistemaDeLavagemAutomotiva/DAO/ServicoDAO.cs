@@ -12,7 +12,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
     public class ServicoDAO : IServicoDAO
     {
-        public void salvar(Servico servico)
+        public void Salvar(Servico servico)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void atualizar(Servico servico)
+        public void Atualizar(Servico servico)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void desativar(Servico servico)
+        public void Desativar(Servico servico)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                 throw new Exception("Erro ao deletar serviço: " + ex.Message);
             }
         }
-        public Servico buscarPorCodigo(int idServico)
+        public Servico BuscarPorCodigo(int idServico)
         {
             try
             {
@@ -112,7 +112,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public List<Servico> buscarTodos()
+        public List<Servico> BuscarTodos()
         {
             List<Servico> servicos = new List<Servico>();
             try

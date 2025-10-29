@@ -12,7 +12,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
     public class FuncionarioDAO : IFuncionarioDAO
     {
-        public void salvar(Funcionario funcionario)
+        public void Salvar(Funcionario funcionario)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void atualizar(Funcionario funcionario)
+        public void Atualizar(Funcionario funcionario)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void desativar(Funcionario funcionario)
+        public void Desativar(Funcionario funcionario)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public Funcionario buscarPorCodigo(int idFuncionario)
+        public Funcionario BuscarPorCodigo(int idFuncionario)
         {
             try
             {
@@ -102,7 +102,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                                 Nome = reader.GetString("nome"),
                                 Cargo = reader.GetString("cargo"),
                                 Ativo = reader.GetBoolean("ativo"),
-                                Endereco = enderecoDAO.buscarPorCodigo(reader.GetInt32("id_endereco"))
+                                Endereco = enderecoDAO.BuscarPorCodigo(reader.GetInt32("id_endereco"))
 
                             };
                             return func;
@@ -120,7 +120,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public List<Funcionario> buscarTodos()
+        public List<Funcionario> BuscarTodos()
         {
             List<Funcionario> funcionarios = new List<Funcionario>();
 
@@ -141,7 +141,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                             Nome = reader.GetString("nome"),
                             Cargo = reader.GetString("cargo"),
                             Ativo = reader.GetBoolean("ativo"),
-                            Endereco = enderecoDAO.buscarPorCodigo(reader.GetInt32("id_endereco"))
+                            Endereco = enderecoDAO.BuscarPorCodigo(reader.GetInt32("id_endereco"))
                         };
                     }
                     return funcionarios;

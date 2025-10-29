@@ -9,10 +9,10 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
     public interface IFuncionarioDAO
     {
-        void salvar(Funcionario funcionario);
-        void atualizar(Funcionario funcionario);
-        void desativar(Funcionario funcionario);
-        Funcionario buscarPorCodigo(int _idFuncionario);
-        List<Funcionario> buscarTodos();
+        void Salvar(Funcionario funcionario);
+        void Atualizar(Funcionario funcionario);
+        void Desativar(Funcionario funcionario);
+        Funcionario BuscarPorCodigo(int _idFuncionario);
+        List<Funcionario> BuscarTodos();
     }
 }

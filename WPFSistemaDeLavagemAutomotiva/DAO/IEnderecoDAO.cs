@@ -9,10 +9,10 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
     public interface IEnderecoDAO
     {
-        void salvar(Endereco endereco);
-        void atualizar(Endereco endereco);
-        void desativar(Endereco endereco);
-        Endereco buscarPorCodigo(int idEndereco);
-        List<Endereco> buscarTodos();
+        void Salvar(Endereco endereco);
+        void Atualizar(Endereco endereco);
+        void Desativar(Endereco endereco);
+        Endereco BuscarPorCodigo(int idEndereco);
+        List<Endereco> BuscarTodos();
     }
 }
