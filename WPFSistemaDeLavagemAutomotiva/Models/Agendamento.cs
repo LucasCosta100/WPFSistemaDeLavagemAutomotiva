@@ -54,9 +54,16 @@ namespace WPFSistemaDeLavagemAutomotiva.Models
             set { _valorTotal = value; }
         }
 
+        private bool _ativo;
+        public bool Ativo
+        {
+            get { return _ativo; }
+            set { _ativo = value; }
+        }
+
         public Agendamento() { }
 
-        public Agendamento(int idAgendamento, Cliente cliente, Servico servico, DateTime dataAgendada, TimeSpan horaAgendamento, string statusServico, double valorTotal)
+        public Agendamento(int idAgendamento, Cliente cliente, Servico servico, DateTime dataAgendada, TimeSpan horaAgendamento, string statusServico, double valorTotal, bool ativo)
         {
             this._idAgendamento = idAgendamento;
             this._cliente = cliente;
@@ -65,6 +72,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Models
             this._horaAgendamento = horaAgendamento;
             this._statusServico = statusServico;
             this._valorTotal = valorTotal;
+            this._ativo = ativo;
         }
     }
 }

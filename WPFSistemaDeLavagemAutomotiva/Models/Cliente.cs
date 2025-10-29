@@ -37,17 +37,25 @@ namespace WPFSistemaDeLavagemAutomotiva.Models
             set { _telefone = value; }
         }
 
+        private bool _ativo;
+        public bool Ativo
+        {
+            get { return _ativo; }
+            set { _ativo = value; }
+        }
+
         public Cliente()
         {
 
         }
         
-        public Cliente(int idCliente, string nome, string email, string telefone)
+        public Cliente(int idCliente, string nome, string email, string telefone, bool ativo)
         {
             this._idCliente = idCliente;
             this._nome = nome;
             this._email = email;
             this._telefone = telefone;
+            this._ativo = ativo;
         }
     }
 }

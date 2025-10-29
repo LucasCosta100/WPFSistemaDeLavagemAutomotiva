@@ -10,7 +10,7 @@ using WPFSistemaDeLavagemAutomotiva.Models;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class FuncionarioDAO
+    public class FuncionarioDAO : IFuncionarioDAO
     {
         public void salvar(Funcionario funcionario)
         {
@@ -18,10 +18,11 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
-                    string sql = "INSERT INTO funcionarios (id_funcionario, nome, cargo) VALUES (@id, @nome, @cargo)";
-                    MySqlConnector.MySqlCommand cmd = new MySqlConnector.MySqlCommand(sql, conn);
+                    string sql = "INSERT INTO funcionarios (id_funcionario, nome, cargo, ativo) VALUES (@id, @nome, @cargo, @ativo)";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@nome", funcionario.Nome);
                     cmd.Parameters.AddWithValue("@cargo", funcionario.Cargo);
+                    cmd.Parameters.AddWithValue("@ativo", true);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -39,11 +40,12 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
-                    string sql = "UPDATE funcionarios SET nome = @nome, cargo = @cargo WHERE id_funcionario = @id";
-                    MySqlConnector.MySqlCommand cmd = new MySqlConnector.MySqlCommand(sql, conn);
+                    string sql = "UPDATE funcionarios SET nome = @nome, cargo = @cargo, ativo = @ativo WHERE id_funcionario = @id";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@nome", funcionario.Nome);
                     cmd.Parameters.AddWithValue("@cargo", funcionario.Cargo);
                     cmd.Parameters.AddWithValue("@id", funcionario.IdFuncionario);
+                    cmd.Parameters.AddWithValue("@ativo", funcionario.Ativo);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -55,14 +57,15 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void deletar(Funcionario funcionario)
+        public void desativar(Funcionario funcionario)
         {
             try
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
-                    string sql = "DELETE FROM funcionarios WHERE id_funcionario = @id";
+                    string sql = "UPDATE funcionarios SET ativo = @ativo WHERE id_funcionario = @id";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@ativo", false);
                     cmd.Parameters.AddWithValue("@id", funcionario.IdFuncionario);
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -90,12 +93,13 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     {
                         if (reader.Read())
                         {
-                            Funcionario func = new Funcionario
-                            (
-                                reader.GetInt32("id_funcionario"),
-                                reader.GetString("nome"),
-                                reader.GetString("cargo")
-                            );
+                            Funcionario func = new Funcionario()
+                            {
+                                IdFuncionario = reader.GetInt32("id_funcionario"),
+                                Nome = reader.GetString("nome"),
+                                Cargo = reader.GetString("cargo"),
+                                Ativo = reader.GetBoolean("ativo")
+                            };
                             return func;
                         }
                         else
@@ -125,12 +129,13 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                 {
                     while (reader.Read())
                     {
-                        Funcionario func = new Funcionario
-                        (
-                            reader.GetInt32("id_funcionario"),
-                            reader.GetString("nome"),
-                            reader.GetString("cargo")
-                        );
+                        Funcionario func = new Funcionario()
+                        {
+                            IdFuncionario = reader.GetInt32("id_funcionario"),
+                            Nome = reader.GetString("nome"),
+                            Cargo = reader.GetString("cargo"),
+                            Ativo = reader.GetBoolean("ativo")
+                        };
                     }
                     return funcionarios;
                 }

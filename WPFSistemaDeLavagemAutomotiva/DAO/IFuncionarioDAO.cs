@@ -11,8 +11,8 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
     {
         void salvar(Funcionario funcionario);
         void atualizar(Funcionario funcionario);
-        void deletar(Funcionario funcionario);
-        void buscarPorCodigo(int _idFuncionario);
+        void desativar(Funcionario funcionario);
+        Funcionario buscarPorCodigo(int _idFuncionario);
         List<Funcionario> buscarTodos();
     }
 }

@@ -10,7 +10,7 @@ using WPFSistemaDeLavagemAutomotiva.DAO;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class ServicoDAO
+    public class ServicoDAO : IServicoDAO
     {
         public void salvar(Servico servico)
         {
@@ -18,10 +18,11 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
-                    string sql = "INSERT INTO servicos (id_servico, servico, valor) VALUES (@id, @servico, @valor)";
+                    string sql = "INSERT INTO servicos (id_servico, servico, valor, ativo) VALUES (@id, @servico, @valor, @ativo)";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@nome", servico.NomeServico);
                     cmd.Parameters.AddWithValue("@descricao", servico.Valor);
+                    cmd.Parameters.AddWithValue("@ativo", true);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -40,11 +41,12 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
-                    string sql = "UPDATE servicos SET servico = @servico, valor = @valor WHERE id_servico = @id";
+                    string sql = "UPDATE servicos SET servico = @servico, valor = @valor, ativo = @ativo WHERE id_servico = @id";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@servico", servico.NomeServico);
                     cmd.Parameters.AddWithValue("@valor", servico.Valor);
                     cmd.Parameters.AddWithValue("@id", servico.IdServico);
+                    cmd.Parameters.AddWithValue("@ativo", true);
                     conn.Open();
                     cmd.ExecuteNonQuery();
                 }
@@ -55,14 +57,15 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void deletar(Servico servico)
+        public void desativar(Servico servico)
         {
             try
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
-                    string sql = "DELETE FROM servicos WHERE id_servico = @id";
+                    string sql = "UPDATE servicos SET ativo = @ativo WHERE id_servico = @id";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@ativo", false);
                     cmd.Parameters.AddWithValue("@id", servico.IdServico);
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -91,7 +94,8 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                             {
                                 IdServico = reader.GetInt32(reader.GetOrdinal("id_servico")),
                                 NomeServico = reader.GetString(reader.GetOrdinal("servico")),
-                                Valor = reader.GetDecimal(reader.GetOrdinal("valor"))
+                                Valor = reader.GetDecimal(reader.GetOrdinal("valor")),
+                                Ativo = reader.GetBoolean(reader.GetOrdinal("ativo"))
                             };
                             return servico;
                         }
@@ -126,7 +130,8 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                             {
                                 IdServico = reader.GetInt32(reader.GetOrdinal("id_servico")),
                                 NomeServico = reader.GetString(reader.GetOrdinal("servico")),
-                                Valor = reader.GetDecimal(reader.GetOrdinal("valor"))
+                                Valor = reader.GetDecimal(reader.GetOrdinal("valor")),
+                                Ativo = reader.GetBoolean(reader.GetOrdinal("ativo"))
                             };
                             servicos.Add(servico);
                         }

@@ -29,15 +29,22 @@ namespace WPFSistemaDeLavagemAutomotiva.Models
             set { _cargo = value; }
         }
 
+        private bool _ativo;
+        public bool Ativo
+        {
+            get { return _ativo; }
+            set { _ativo = value; }
+        }
         public Funcionario()
         {
         }
 
-        public Funcionario(int idFuncionario, string nome, string cargo)
+        public Funcionario(int idFuncionario, string nome, string cargo, bool ativo)
         {
             this._idFuncionario = idFuncionario;
             this._nome = nome;
             this._cargo = cargo;
+            this._ativo = ativo;
         }
     }
 }

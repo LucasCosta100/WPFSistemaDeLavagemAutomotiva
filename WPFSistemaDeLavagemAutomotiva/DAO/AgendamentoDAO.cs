@@ -11,7 +11,7 @@ using MySqlConnector;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class AgendamentoDAO
+    public class AgendamentoDAO : IAgendamentoDAO
     {
         public void salvar(Agendamento agendamento)
         {
@@ -19,7 +19,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
-                    string sql = "INSERT INTO agendamentos (id_cliente, id_servico, data_agendamento, hora_agendamento, status_servico, valor_total) VALUES (@cliente, @servico, @data, @hora, @status, @valor)";
+                    string sql = "INSERT INTO agendamentos (id_cliente, id_servico, data_agendamento, hora_agendamento, status_servico, valor_total, ativo) VALUES (@cliente, @servico, @data, @hora, @status, @valor, @ativo)";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@cliente", agendamento.ClienteAgendado.IdCliente);
                     cmd.Parameters.AddWithValue("@servico", agendamento.ServicoAgendado.IdServico);
@@ -27,9 +27,11 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     cmd.Parameters.AddWithValue("@hora", agendamento.HoraAgendamento);
                     cmd.Parameters.AddWithValue("@status", "Pendente");
                     cmd.Parameters.AddWithValue("@valor", agendamento.ServicoAgendado.Valor);
+                    cmd.Parameters.AddWithValue("@ativo", true);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
+                    MessageBox.Show("Agendamento salvo com sucesso!");
                 }
             }
             catch (Exception ex)
@@ -44,7 +46,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
-                    string sql = "UPDATE agendamentos SET id_cliente = @cliente, id_servico = @servico, data_agendamento = @data, hora_agendamento = @hora, status_servico = @status, valor_total = @valor WHERE id_agendamento = @id";
+                    string sql = "UPDATE agendamentos SET id_cliente = @cliente, id_servico = @servico, data_agendamento = @data, hora_agendamento = @hora, status_servico = @status, valor_total = @valor, ativo = @ativo WHERE id_agendamento = @id";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@cliente", agendamento.ClienteAgendado.IdCliente);
                     cmd.Parameters.AddWithValue("@servico", agendamento.ServicoAgendado.IdServico);
@@ -53,6 +55,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     cmd.Parameters.AddWithValue("@status", agendamento.StatusServico);
                     cmd.Parameters.AddWithValue("@valor", agendamento.ValorTotal);
                     cmd.Parameters.AddWithValue("@id", agendamento.IdAgendamento);
+                    cmd.Parameters.AddWithValue("@ativo", true);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -64,16 +67,16 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void deletar(Agendamento agendamento)
+        public void desativar(Agendamento agendamento)
         {
             try
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
-                    string sql = "DELETE FROM agendamentos WHERE id_agendamento = @id";
+                    string sql = "UPDATE agendamentos SET ativo = @ativo WHERE id_agendamento = @id";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@ativo", false);
                     cmd.Parameters.AddWithValue("@id", agendamento.IdAgendamento);
-
                     conn.Open();
                     cmd.ExecuteNonQuery();
                 }
@@ -110,6 +113,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                                 HoraAgendamento = reader.GetTimeSpan(reader.GetOrdinal("hora_agendamento")),
                                 StatusServico = reader.GetString(reader.GetOrdinal("status_servico")),
                                 ValorTotal = reader.GetDouble(reader.GetOrdinal("valor_total"))
+                                Ativo = reader.GetBoolean(reader.GetOrdinal("ativo"))
                             };
                             return agendamento;
                         }
@@ -135,7 +139,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
 
             try
             {
-                using(MySqlConnection conn = Conexao.ObterConexao())
+                using (MySqlConnection conn = Conexao.ObterConexao())
                 {
                     string sql = "SELECT * FROM agendamentos ";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
@@ -153,6 +157,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                                 HoraAgendamento = reader.GetTimeSpan(reader.GetOrdinal("hora_agendamento")),
                                 StatusServico = reader.GetString(reader.GetOrdinal("status_servico")),
                                 ValorTotal = reader.GetDouble(reader.GetOrdinal("valor_total"))
+                                Ativo = reader.GetBoolean(reader.GetOrdinal("ativo"))
                             };
                             agendamentos.Add(agendamento);
                         }
@@ -164,5 +169,6 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             {
                 throw new Exception("Erro ao buscar todos os agendamentos: " + ex.Message);
             }
+        }
     }
 }

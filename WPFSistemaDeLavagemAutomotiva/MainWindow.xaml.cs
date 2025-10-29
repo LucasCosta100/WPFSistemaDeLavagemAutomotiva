@@ -27,10 +27,9 @@ namespace WPFSistemaDeLavagemAutomotiva
         {
             InitializeComponent();
 
-           
             ClienteDAO clienteDAO = new ClienteDAO();
-            var client = clienteDAO.buscarPorCodigo(1);
-            MessageBox.Show("Cliente encontrado: " + client.Nome);
+            var cliente = clienteDAO.buscarPorCodigo(1);
+            clienteDAO.deletar(cliente);
         }
     }
 }

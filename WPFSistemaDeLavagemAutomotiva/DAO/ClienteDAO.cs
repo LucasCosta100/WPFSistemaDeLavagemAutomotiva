@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WPFSistemaDeLavagemAutomotiva.Database;
 using WPFSistemaDeLavagemAutomotiva.Models;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class ClienteDAO
+    public class ClienteDAO : IClienteDAO
     {
         public void salvar(Cliente cliente)
         {
@@ -18,12 +19,13 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
-                    string sql = "INSERT INTO clientes (id_cliente, nome, email, telefone) VALUES (@id, @nome, @email, @telefone)";
+                    string sql = "INSERT INTO clientes (id_cliente, nome, email, telefone, ativo) VALUES (@id, @nome, @email, @telefone, @ativo)";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@nome", cliente.IdCliente);
                     cmd.Parameters.AddWithValue("@telefone", cliente.Telefone);
                     cmd.Parameters.AddWithValue("@email", cliente.Email);
                     cmd.Parameters.AddWithValue("@endereco", cliente.Telefone);
+                    cmd.Parameters.AddWithValue("@ativo", true);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -42,12 +44,13 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
-                    string sql = "UPDATE clientes SET nome = @nome, email = @email, telefone = @telefone WHERE id_cliente = @id";
+                    string sql = "UPDATE clientes SET nome = @nome, email = @email, telefone = @telefone, ativo = @ativo WHERE id_cliente = @id";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@nome", cliente.Nome);
                     cmd.Parameters.AddWithValue("@email", cliente.Email);
                     cmd.Parameters.AddWithValue("@telefone", cliente.Telefone);
                     cmd.Parameters.AddWithValue("@id", cliente.IdCliente);
+                    cmd.Parameters.AddWithValue("@ativo", cliente.Ativo);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -59,16 +62,16 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void deletar(Cliente cliente)
+        public void desativar(Cliente cliente)
         {
             try
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
-                    string sql = "DELETE FROM clientes WHERE id_cliente = @id";
+                    string sql = "UPDATE clientes SET ativo = @ativo WHERE id_cliente = @id";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@ativo", false);
                     cmd.Parameters.AddWithValue("@id", cliente.IdCliente);
-
                     conn.Open();
                     cmd.ExecuteNonQuery();
                 }
@@ -95,13 +98,14 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     {
                         if (reader.Read())
                         {
-                            Cliente client = new Cliente
-                            (
-                                reader.GetInt32(reader.GetOrdinal("id_cliente")),
-                                reader.GetString(reader.GetOrdinal("nome")),
-                                reader.GetString(reader.GetOrdinal("email")),
-                                reader.GetString(reader.GetOrdinal("telefone"))
-                            );
+                            Cliente client = new Cliente()
+                            {
+                                IdCliente = reader.GetInt32(reader.GetOrdinal("id_cliente")),
+                                Nome = reader.GetString(reader.GetOrdinal("nome")),
+                                Email = reader.GetString(reader.GetOrdinal("email")),
+                                Telefone = reader.GetString(reader.GetOrdinal("telefone")),
+                                Ativo = reader.GetBoolean(reader.GetOrdinal("ativo"))
+                            };
                             return client;
                         }
                     }
@@ -129,13 +133,14 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     {
                         while (reader.Read())
                         {
-                            Cliente client = new Cliente
-                            (
-                                reader.GetInt32("id_cliente"),
-                                reader.GetString("nome"),
-                                reader.GetString("email"),
-                                reader.GetString("telefone")
-                            );
+                            Cliente client = new Cliente()
+                            {
+                                IdCliente = reader.GetInt32(reader.GetOrdinal("id_cliente")),
+                                Nome = reader.GetString(reader.GetOrdinal("nome")),
+                                Email = reader.GetString(reader.GetOrdinal("email")),
+                                Telefone = reader.GetString(reader.GetOrdinal("telefone")),
+                                Ativo = reader.GetBoolean(reader.GetOrdinal("ativo"))
+                            };
                             clientes.Add(client);
                         }
                         return clientes;
