@@ -10,11 +10,7 @@ using WPFSistemaDeLavagemAutomotiva.Models;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-<<<<<<< HEAD
-    public class ClienteDAO 
-=======
     public class ClienteDAO
->>>>>>> c03e0240500c1fbbf36ef5907a2ce8898bfe2a90
     {
         public void salvar(Cliente cliente)
         {

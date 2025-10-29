@@ -10,17 +10,13 @@ using WPFSistemaDeLavagemAutomotiva.Models;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-<<<<<<< HEAD
-    public class FuncionarioDAO 
-=======
     public class FuncionarioDAO
->>>>>>> c03e0240500c1fbbf36ef5907a2ce8898bfe2a90
     {
         public void salvar(Funcionario funcionario)
         {
             try
             {
-                using (MySqlConnector.MySqlConnection conn = Database.Conexao.ObterConexao())
+                using (MySqlConnection conn = Conexao.ObterConexao())
                 {
                     string sql = "INSERT INTO funcionarios (id_funcionario, nome, cargo) VALUES (@id, @nome, @cargo)";
                     MySqlConnector.MySqlCommand cmd = new MySqlConnector.MySqlCommand(sql, conn);
@@ -41,7 +37,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
         {
             try
             {
-                using (MySqlConnector.MySqlConnection conn = Database.Conexao.ObterConexao())
+                using (MySqlConnection conn = Conexao.ObterConexao())
                 {
                     string sql = "UPDATE funcionarios SET nome = @nome, cargo = @cargo WHERE id_funcionario = @id";
                     MySqlConnector.MySqlCommand cmd = new MySqlConnector.MySqlCommand(sql, conn);
@@ -63,10 +59,10 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
         {
             try
             {
-                using (MySqlConnector.MySqlConnection conn = Database.Conexao.ObterConexao())
+                using (MySqlConnection conn = Conexao.ObterConexao())
                 {
                     string sql = "DELETE FROM funcionarios WHERE id_funcionario = @id";
-                    MySqlConnector.MySqlCommand cmd = new MySqlConnector.MySqlCommand(sql, conn);
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@id", funcionario.IdFuncionario);
                     conn.Open();
                     cmd.ExecuteNonQuery();

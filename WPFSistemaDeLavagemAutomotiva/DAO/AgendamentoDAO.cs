@@ -11,11 +11,7 @@ using MySqlConnector;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-<<<<<<< HEAD
-    public class AgendamentoDAO 
-=======
     public class AgendamentoDAO
->>>>>>> c03e0240500c1fbbf36ef5907a2ce8898bfe2a90
     {
         public void salvar(Agendamento agendamento)
         {
@@ -94,6 +90,8 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
+                    ClienteDAO clienteDAO = new ClienteDAO();
+                    ServicoDAO servicoDAO = new ServicoDAO();
                     string sql = "SELECT * FROM agendamentos WHERE id_agendamento = @id";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@id", idAgendamento);
@@ -106,6 +104,8 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                             Agendamento agendamento = new Agendamento()
                             {
                                 IdAgendamento = reader.GetInt32(reader.GetOrdinal("id_agendamento")),
+                                ClienteAgendado = clienteDAO.buscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_cliente"))),
+                                ServicoAgendado = servicoDAO.buscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_servico"))),
                                 DataAgendada = reader.GetDateTime(reader.GetOrdinal("data_agendamento")),
                                 HoraAgendamento = reader.GetTimeSpan(reader.GetOrdinal("hora_agendamento")),
                                 StatusServico = reader.GetString(reader.GetOrdinal("status_servico")),
@@ -130,6 +130,9 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
         public List<Agendamento> buscarTodos()
         {
             List<Agendamento> agendamentos = new List<Agendamento>();
+            ClienteDAO clienteDAO = new ClienteDAO();
+            ServicoDAO servicoDAO = new ServicoDAO();
+
             try
             {
                 using(MySqlConnection conn = Conexao.ObterConexao())
@@ -143,9 +146,17 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                         {
                             Agendamento agendamento = new Agendamento()
                             {
-
-                            }
+                                IdAgendamento = reader.GetInt32(reader.GetOrdinal("id_agendamento")),
+                                ClienteAgendado = clienteDAO.buscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_cliente"))),
+                                ServicoAgendado = servicoDAO.buscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_servico"))),
+                                DataAgendada = reader.GetDateTime(reader.GetOrdinal("data_agendamento")),
+                                HoraAgendamento = reader.GetTimeSpan(reader.GetOrdinal("hora_agendamento")),
+                                StatusServico = reader.GetString(reader.GetOrdinal("status_servico")),
+                                ValorTotal = reader.GetDouble(reader.GetOrdinal("valor_total"))
+                            };
+                            agendamentos.Add(agendamento);
                         }
+                        return agendamentos;
                     }
                 }
             }
