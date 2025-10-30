@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using WPFSistemaDeLavagemAutomotiva.DAO;
 using WPFSistemaDeLavagemAutomotiva.Database;
 using WPFSistemaDeLavagemAutomotiva.Models;
+using WPFSistemaDeLavagemAutomotiva.Service;
 
 namespace WPFSistemaDeLavagemAutomotiva
 {
@@ -27,9 +28,6 @@ namespace WPFSistemaDeLavagemAutomotiva
         {
             InitializeComponent();
 
-            ClienteDAO clienteDAO = new ClienteDAO();
-            var cliente = clienteDAO.buscarPorCodigo(1);
-            clienteDAO.deletar(cliente);
         }
     }
 }

@@ -96,13 +96,17 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     {
                         if (reader.Read())
                         {
+                            int idxEndereco = reader.GetOrdinal("id_endereco");
+                            Endereco endereco = reader.IsDBNull(idxEndereco) // Se for nulo, retorna null, se não, busca o endereço
+                                ? null
+                                : enderecoDAO.BuscarPorCodigo(reader.GetInt32(idxEndereco));
                             Funcionario func = new Funcionario()
                             {
                                 IdFuncionario = reader.GetInt32("id_funcionario"),
                                 Nome = reader.GetString("nome"),
                                 Cargo = reader.GetString("cargo"),
                                 Ativo = reader.GetBoolean("ativo"),
-                                Endereco = enderecoDAO.BuscarPorCodigo(reader.GetInt32("id_endereco"))
+                                Endereco = endereco
 
                             };
                             return func;
@@ -133,6 +137,10 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                 conn.Open();
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
+                    int idxEndereco = reader.GetOrdinal("id_endereco");
+                    Endereco endereco = reader.IsDBNull(idxEndereco)
+                        ? null
+                        : enderecoDAO.BuscarPorCodigo(reader.GetInt32(idxEndereco));
                     while (reader.Read())
                     {
                         Funcionario func = new Funcionario()
@@ -141,7 +149,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                             Nome = reader.GetString("nome"),
                             Cargo = reader.GetString("cargo"),
                             Ativo = reader.GetBoolean("ativo"),
-                            Endereco = enderecoDAO.BuscarPorCodigo(reader.GetInt32("id_endereco"))
+                            Endereco = endereco
                         };
                     }
                     return funcionarios;
