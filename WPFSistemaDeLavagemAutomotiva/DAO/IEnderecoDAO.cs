@@ -11,7 +11,6 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
     {
         void Salvar(Endereco endereco);
         void Atualizar(Endereco endereco);
-        void Desativar(Endereco endereco);
         Endereco BuscarPorCodigo(int idEndereco);
         List<Endereco> BuscarTodos();
     }

@@ -62,26 +62,6 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void Desativar(Endereco endereco)
-        {
-            try
-            {
-                using (MySqlConnection conn = Conexao.ObterConexao())
-                {
-                    string sql = "UPDATE enderecos SET ativo = @ativo WHERE id_endereco = @id";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@ativo", false);
-                    cmd.Parameters.AddWithValue("@id", endereco.IdEndereco);
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao desativar endereco: " + ex.Message);
-            }
-        }
-
         public Endereco BuscarPorCodigo(int idEndereco)
         {
             try
@@ -122,7 +102,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public List<Endereco> ListarTodos()
+        public List<Endereco> BuscarTodos()
         {
             List<Endereco> enderecos = new List<Endereco>();
             try
