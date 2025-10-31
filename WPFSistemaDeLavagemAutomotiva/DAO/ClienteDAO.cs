@@ -13,20 +13,19 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
     public class ClienteDAO : IClienteDAO
     {
-        public void salvar(Cliente cliente)
+        public void Salvar(Cliente cliente)
         {
             try
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
-                    string sql = "INSERT INTO clientes (id_cliente, nome, email, telefone, ativo) VALUES (@id, @nome, @email, @telefone, @ativo)";
+                    string sql = "INSERT INTO clientes (id_cliente, nome, email, telefone, ativo, id_endereco) VALUES (@id, @nome, @email, @telefone, @ativo, @endereco)";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@nome", cliente.IdCliente);
-                    cmd.Parameters.AddWithValue("@telefone", cliente.Telefone);
                     cmd.Parameters.AddWithValue("@email", cliente.Email);
-                    cmd.Parameters.AddWithValue("@endereco", cliente.Telefone);
+                    cmd.Parameters.AddWithValue("@telefone", cliente.Telefone);
                     cmd.Parameters.AddWithValue("@ativo", true);
-
+                    cmd.Parameters.AddWithValue("@endereco", cliente.EnderecoCliente.IdEndereco);
                     conn.Open();
                     cmd.ExecuteNonQuery();
                 }
@@ -38,20 +37,20 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void atualizar(Cliente cliente)
+        public void Atualizar(Cliente cliente)
         {
             try
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
-                    string sql = "UPDATE clientes SET nome = @nome, email = @email, telefone = @telefone, ativo = @ativo WHERE id_cliente = @id";
+                    string sql = "UPDATE clientes SET nome = @nome, email = @email, telefone = @telefone, ativo = @ativo, id_endereco = @id_endereco WHERE id_cliente = @id";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@nome", cliente.Nome);
                     cmd.Parameters.AddWithValue("@email", cliente.Email);
                     cmd.Parameters.AddWithValue("@telefone", cliente.Telefone);
-                    cmd.Parameters.AddWithValue("@id", cliente.IdCliente);
                     cmd.Parameters.AddWithValue("@ativo", cliente.Ativo);
-
+                    cmd.Parameters.AddWithValue("@id_endereco", cliente.EnderecoCliente.IdEndereco);
+                    cmd.Parameters.AddWithValue("@id", cliente.IdCliente);
                     conn.Open();
                     cmd.ExecuteNonQuery();
                 }
@@ -62,7 +61,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void desativar(Cliente cliente)
+        public void Desativar(Cliente cliente)
         {
             try
             {
@@ -82,12 +81,13 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public Cliente buscarPorCodigo(int idCliente)
+        public Cliente BuscarPorCodigo(int idCliente)
         {
             try
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
+                    EnderecoDAO enderecoDAO = new EnderecoDAO();
                     string sql = "SELECT * FROM clientes WHERE id_cliente = @id";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@id", idCliente);
@@ -98,13 +98,19 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     {
                         if (reader.Read())
                         {
+                            // Pega o Index e verifica se é nulo antes de buscar o endereço
+                            int idxEndereco = reader.GetOrdinal("id_endereco");
+                            Endereco endereco = reader.IsDBNull(idxEndereco)
+                                ? null
+                                : enderecoDAO.BuscarPorCodigo(reader.GetInt32(idxEndereco));
                             Cliente client = new Cliente()
                             {
                                 IdCliente = reader.GetInt32(reader.GetOrdinal("id_cliente")),
                                 Nome = reader.GetString(reader.GetOrdinal("nome")),
                                 Email = reader.GetString(reader.GetOrdinal("email")),
                                 Telefone = reader.GetString(reader.GetOrdinal("telefone")),
-                                Ativo = reader.GetBoolean(reader.GetOrdinal("ativo"))
+                                Ativo = reader.GetBoolean(reader.GetOrdinal("ativo")),
+                                EnderecoCliente = endereco 
                             };
                             return client;
                         }
@@ -118,13 +124,14 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             return null;
         }
 
-        public List<Cliente> buscarTodos()
+        public List<Cliente> BuscarTodos()
         {
             List<Cliente> clientes = new List<Cliente>();
             try
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
+                    EnderecoDAO enderecoDAO = new EnderecoDAO();
                     string sql = "SELECT * FROM clientes";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
 
@@ -133,13 +140,18 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     {
                         while (reader.Read())
                         {
+                            int idxEndereco = reader.GetOrdinal("id_endereco");
+                            Endereco endereco = reader.IsDBNull(idxEndereco) ? null
+                                : enderecoDAO.BuscarPorCodigo(reader.GetInt32(idxEndereco));
+
                             Cliente client = new Cliente()
                             {
                                 IdCliente = reader.GetInt32(reader.GetOrdinal("id_cliente")),
                                 Nome = reader.GetString(reader.GetOrdinal("nome")),
                                 Email = reader.GetString(reader.GetOrdinal("email")),
                                 Telefone = reader.GetString(reader.GetOrdinal("telefone")),
-                                Ativo = reader.GetBoolean(reader.GetOrdinal("ativo"))
+                                Ativo = reader.GetBoolean(reader.GetOrdinal("ativo")),
+                                EnderecoCliente = endereco
                             };
                             clientes.Add(client);
                         }
