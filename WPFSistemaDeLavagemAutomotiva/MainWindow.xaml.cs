@@ -16,6 +16,7 @@ using WPFSistemaDeLavagemAutomotiva.DAO;
 using WPFSistemaDeLavagemAutomotiva.Database;
 using WPFSistemaDeLavagemAutomotiva.Models;
 using WPFSistemaDeLavagemAutomotiva.Service;
+using WPFSistemaDeLavagemAutomotiva.View.Components;
 
 namespace WPFSistemaDeLavagemAutomotiva
 {
@@ -28,6 +29,14 @@ namespace WPFSistemaDeLavagemAutomotiva
         {
             InitializeComponent();
 
+        }
+
+        private void sidebar_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selecionado = sidebar.SelectedItem as NavButton; // Pega o item selecionado e converte para NavButton, como NavButton herda de ListBoxItem é possível fazer essa conversão
+
+
+            paginasnav.Navigate(selecionado.NavLink); // Navega para a página definida na propriedade NavLink do NavButton selecionado
         }
     }
 }

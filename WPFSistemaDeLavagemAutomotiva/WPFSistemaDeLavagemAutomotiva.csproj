@@ -121,6 +121,16 @@
     <Compile Include="Service\EnderecoService.cs" />
     <Compile Include="Service\FuncionarioService.cs" />
     <Compile Include="Service\ServicoService.cs" />
+    <Compile Include="View\AgendamentosView.xaml.cs">
+      <DependentUpon>AgendamentosView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientesView.xaml.cs">
+      <DependentUpon>ClientesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Components\NavButton.cs" />
+    <Compile Include="View\FuncionariosView.xaml.cs">
+      <DependentUpon>FuncionariosView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -145,6 +155,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AgendamentosView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClientesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FuncionariosView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Agendamento.cs" />
