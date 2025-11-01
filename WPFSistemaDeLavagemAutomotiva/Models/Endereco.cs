@@ -58,8 +58,8 @@ namespace WPFSistemaDeLavagemAutomotiva.Models
             set { _estado = value; }
         }
 
-        private int _cep;
-        public int Cep
+        private string _cep;
+        public string Cep
         {
             get { return _cep; }
             set { _cep = value; }
@@ -70,7 +70,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Models
 
         }
 
-        public Endereco(int idEndereco, string rua, string numero, string complemento, string bairro, string cidade, string estado, int cep)
+        public Endereco(int idEndereco, string rua, string numero, string complemento, string bairro, string cidade, string estado, string cep)
         {
             this._idEndereco = idEndereco;
             this._rua = rua;

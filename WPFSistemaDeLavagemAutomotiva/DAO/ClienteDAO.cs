@@ -124,6 +124,45 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             return null;
         }
 
+        public Cliente BuscarPorNome(string nome)
+        {
+            try
+            {
+                using (MySqlConnection conn = Conexao.ObterConexao())
+                {
+                    EnderecoDAO enderecoDAO = new EnderecoDAO();
+                    string sql = "SELECT * FROM clientes WHERE nome = @nome";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@nome", "%" + nome + "%");
+                    conn.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            int idxEndereco = reader.GetOrdinal("id_endereco");
+                            Endereco endereco = reader.IsDBNull(idxEndereco) ? null
+                                : enderecoDAO.BuscarPorCodigo(reader.GetInt32(idxEndereco));
+                            Cliente client = new Cliente()
+                            {
+                                IdCliente = reader.GetInt32(reader.GetOrdinal("id_cliente")),
+                                Nome = reader.GetString(reader.GetOrdinal("nome")),
+                                Email = reader.GetString(reader.GetOrdinal("email")),
+                                Telefone = reader.GetString(reader.GetOrdinal("telefone")),
+                                Ativo = reader.GetBoolean(reader.GetOrdinal("ativo")),
+                                EnderecoCliente = endereco
+                            };
+                            return client;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao buscar cliente por nome: " + ex.Message);
+            }
+            return null;
+        }
+
         public List<Cliente> BuscarTodos()
         {
             List<Cliente> clientes = new List<Cliente>();
