@@ -13,6 +13,9 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
         void Atualizar(Cliente cliente);
         void Desativar(Cliente cliente);
         Cliente BuscarPorCodigo(int idCliente);
+
+        Cliente BuscarPorNome(string nome);
+
         List<Cliente> BuscarTodos();
     }
 }

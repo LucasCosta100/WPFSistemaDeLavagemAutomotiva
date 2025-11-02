@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFSistemaDeLavagemAutomotiva.DAO;
 
 namespace WPFSistemaDeLavagemAutomotiva.View
 {
@@ -20,9 +21,19 @@ namespace WPFSistemaDeLavagemAutomotiva.View
     /// </summary>
     public partial class ClientesView : Page
     {
+        private ClienteDAO _clienteDAO = new ClienteDAO();
         public ClientesView()
         {
             InitializeComponent();
+            CarregarClientes();
+        }
+
+        private void CarregarClientes()
+        {
+            dgClientes.Items.Clear();
+            var clientes = _clienteDAO.BuscarTodos();
+            dgClientes.ItemsSource = clientes;
+            tbTotalClientes.Text = $"Total de Clientes: {clientes.Count.ToString()}";
         }
     }
 }

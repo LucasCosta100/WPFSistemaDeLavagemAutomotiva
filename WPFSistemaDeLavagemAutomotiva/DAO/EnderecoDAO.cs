@@ -9,7 +9,7 @@ using WPFSistemaDeLavagemAutomotiva.Database;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class EnderecoDAO
+    public class EnderecoDAO : IEnderecoDAO
     {
         public void Salvar(Endereco endereco)
         {
@@ -85,7 +85,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                                 Bairro = reader.GetString(reader.GetOrdinal("bairro")),
                                 Cidade = reader.GetString(reader.GetOrdinal("cidade")),
                                 Estado = reader.GetString(reader.GetOrdinal("estado")),
-                                Cep = reader.GetInt32(reader.GetOrdinal("cep"))
+                                Cep = reader.GetString(reader.GetOrdinal("cep"))
                             };
                             return endereco;
                         }
@@ -125,7 +125,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                                 Bairro = reader.GetString(reader.GetOrdinal("bairro")),
                                 Cidade = reader.GetString(reader.GetOrdinal("cidade")),
                                 Estado = reader.GetString(reader.GetOrdinal("estado")),
-                                Cep = reader.GetInt32(reader.GetOrdinal("cep"))
+                                Cep = reader.GetString(reader.GetOrdinal("cep"))
                             };
                             enderecos.Add(endereco);
                         }
