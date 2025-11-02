@@ -8,96 +8,107 @@
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="AgendamentosView">
 
-    <Grid Background="#1C1C1C">
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled"
+                  PanningMode="VerticalOnly"
+                  Background="#1C1C1C">
+        <Grid Background="#1C1C1C">
 
-        <Grid Margin="50">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0"  Text="Agendamentos" FontSize="35" Height="Auto" FontWeight="Bold" Foreground="#ECEFF1" Margin="10,10,0,5"/>
-        </Grid>
+            <Grid Margin="50">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"  Text="Agendamentos" FontSize="35" Height="Auto" FontWeight="Bold" Foreground="#ECEFF1" Margin="10,10,0,5"/>
+            </Grid>
 
-        <!--Conteúdo para os 3 blocos de informações-->
-        <Grid Width="Auto" Height="380" VerticalAlignment="Top" Margin="50,150,50,50">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="60"/>
-                <!-- Espaço -->
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="60"/>
-                <!-- Espaço -->
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <!--Adicionei o Border para os quadrados atrás e um StackPanel pois o Border aceita apenas 1 filho-->
-            <Border Grid.Column="0" Background="#026ADE" CornerRadius="15" Padding="15">
-                <StackPanel>
-                    <TextBlock Text="Próximo Agendamento" Foreground="#ECEFF1" FontSize="16" FontWeight="Normal" FontFamily="Arial" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,20,20,50"/>
-                    <TextBlock x:Name="txtNome" Text="João Alexandre da Costa" Foreground="#ECEFF1" FontSize="30" FontWeight="SemiBold" FontFamily="Arial" Margin="15,0,0,0"/>
-                    <TextBlock x:Name="txtData" Text="15/06/2024 - 14:30" Foreground="#ECEFF1" FontSize="20" FontWeight="Normal" FontFamily="Arial" Margin="15,0,0,0"/>
-                    <TextBlock x:Name="txtServico" Text="Serviço: Lavagem Completa" Foreground="#ECEFF1" FontSize="20" FontWeight="Normal" FontFamily="Arial" Margin="15,0,0,25"/>
-                    <TextBlock FontSize="30" FontFamily="Arial" Margin="15,0,0,0">
-                        <Run Text="Valor Total: " Foreground="#ECEFF1"/>
-                        <Run x:Name="txtValor" Text="R$ 3.750,00" Foreground="#FFA726"/>
-                    </TextBlock>
+            <!--Conteúdo para os 3 blocos de informações-->
+            <Grid Width="Auto" Height="380" VerticalAlignment="Top" Margin="50,150,50,50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="60"/>
+                    <!-- Espaço -->
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="1*"/>
+                    <!-- Espaço -->
+                </Grid.ColumnDefinitions>
+                <!--Adicionei o Border para os quadrados atrás e um StackPanel pois o Border aceita apenas 1 filho-->
+                <Border Grid.Column="0" Background="#026ADE" CornerRadius="15" Padding="15">
+                    <StackPanel>
+                        <TextBlock Text="Próximo Agendamento" Foreground="#ECEFF1" FontSize="20" FontWeight="Bold" FontFamily="Arial" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="20,20,20,50"/>
+                        <TextBlock x:Name="txtNome" Text="" Foreground="#ECEFF1" FontSize="30" FontWeight="SemiBold" FontFamily="Arial" Margin="15,0,0,0"/>
+                        <TextBlock x:Name="txtData" Text="" Foreground="#ECEFF1" FontSize="20" FontWeight="Normal" FontFamily="Arial" Margin="15,0,0,0"/>
+                        <TextBlock x:Name="txtServico" Text="" Foreground="#ECEFF1" FontSize="20" FontWeight="Normal" FontFamily="Arial" Margin="15,0,0,25"/>
+                        <TextBlock FontSize="30" FontFamily="Arial" Margin="15,0,0,0">
+                    <Run x:Name ="txtTextoValor" Text="" Foreground="#ECEFF1"/>
+                    <Run x:Name="txtValor" Text="" Foreground="#FFA726"/>
+                        </TextBlock>
 
-                    <!-- 🔸 StackPanel horizontal para os botões -->
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15,70,15,25">
-                        <Button Content="Confirmar" 
-                                Width="120" Height="40" 
-                                Margin="0,0,10,0"
-                                Background="Green" 
-                                Foreground="#ECEFF1"
-                                FontWeight="Bold"
-                                BorderBrush="Transparent"
-                                Cursor="Hand">
-                        </Button>
+                        <!-- 🔸 StackPanel horizontal para os botões -->
+                        <StackPanel x:Name="spBotoes" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15,70,15,25">
+                            <Button Content="Confirmar" 
+                            Width="120" Height="40" 
+                            Margin="0,0,10,0"
+                            Background="Green" 
+                            Foreground="#ECEFF1"
+                            FontWeight="Bold"
+                            BorderBrush="Transparent"
+                            Cursor="Hand">
+                            </Button>
 
-                        <Button Content="Cancelar" 
-                                Width="120" Height="40"
-                                Background="Red"
-                                Foreground="#ECEFF1"
-                                FontWeight="Bold"
-                                BorderBrush="Transparent"
-                                Cursor="Hand"/>
+                            <Button Content="Cancelar" 
+                            Width="120" Height="40"
+                            Background="Red"
+                            Foreground="#ECEFF1"
+                            FontWeight="Bold"
+                            BorderBrush="Transparent"
+                            Cursor="Hand"/>
+                        </StackPanel>
+
                     </StackPanel>
+                </Border>
+                <Border Grid.Column="2" Background="#026ADE" CornerRadius="15">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                        <TextBlock Text="Agendamentos para Hoje" Foreground="#ECEFF1" FontSize="30" FontWeight="Bold" FontFamily="Arial" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="20,30,20,50"/>
+                        <TextBlock x:Name="txtAgendamentosHoje" Text="" Foreground="#FFA726" FontSize="60" FontWeight="Bold" FontFamily="Arial" Margin="0,0,0,0" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="4" Background="#026ADE" CornerRadius="15">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                        <TextBlock Text="Total de Agendamentos" Foreground="#ECEFF1" FontSize="30" FontWeight="Bold" FontFamily="Arial" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,30,0,50"/>
+                        <TextBlock x:Name="txtAgendamentos" Text="" Foreground="#FFA726" FontSize="60" FontWeight="Bold" FontFamily="Arial" Margin="0,0,0,0" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
 
-                </StackPanel>
-            </Border>
-            <Border Grid.Column="2" Background="#026ADE" CornerRadius="15">
+            <Grid Width="Auto" Height="100" Margin="50,200,50,50" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="600"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
-            </Border>
-            <Border Grid.Column="4" Background="#026ADE" CornerRadius="15">
+                <ListBox x:Name="lbTabelas" Grid.Column="0" SelectionMode="Single" SelectionChanged="lbTabelas_SelectionChanged" Background="#1C1C1C" BorderBrush="Gray" BorderThickness="0,0,0,1" VerticalAlignment="Center">
+                    <!-- Define o painel de itens como um StackPanel horizontal -->
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
 
-            </Border>
+                    <!-- Adiciona os botões de navegação -->
+                    <local:NavButton NavLink="/View/TabelaAgendamentosPendenteView.xaml" StatusFiltro="Pendente" IconFill="#FFC107" Foreground="#FFC107" HoverFill="#FFC107" SelectedFill="#FFC107" NavText="Pendente" FontWeight="Bold" Margin="3,40,3,0" Padding="6,6,6,0" Width="130" Height="40" Icon="M360-840v-80h240v80H360Zm80 440h80v-240h-80v240Zm40 320q-74 0-139.5-28.5T226-186q-49-49-77.5-114.5T120-440q0-74 28.5-139.5T226-694q49-49 114.5-77.5T480-800q62 0 119 20t107 58l56-56 56 56-56 56q38 50 58 107t20 119q0 74-28.5 139.5T734-186q-49 49-114.5 77.5T480-80Zm0-80q116 0 198-82t82-198q0-116-82-198t-198-82q-116 0-198 82t-82 198q0 116 82 198t198 82Zm0-280Z"/>
+                    <local:NavButton NavLink="/View/TabelaAgendamentosEmAndamentoView.xaml" StatusFiltro="Em Andamento" IconFill="#2979FF" Foreground="#2979FF" HoverFill="#2979FF" SelectedFill="#2979FF" NavText="Em Andamento" FontWeight="Bold" Margin="3,40,3,0" Padding="6,6,6,0" Width="150" Height="40" Icon="M339.33-105q-114-42.67-186.66-143.67-72.67-101-72.67-231 0-30 3.83-59.66Q87.67-569 97-597.67L39-564 5.67-621l179-103.33 103.33 178L230-513l-56.67-97.33q-13 31-19.83 63.66-6.83 32.67-6.83 67 0 109.67 63.33 195.84 63.33 86.16 163.33 120.16l-34 58.67Zm294-508.33V-680h113Q699-743 629-778.17q-70-35.16-149-35.16-64.33 0-120.33 22.33t-100.34 62l-34-59.33q52.67-43 117.34-67.34Q407.33-880 480-880q85 0 160.67 33.5Q716.33-813 773.33-751v-69H840v206.67H633.33ZM594.67 0l-179-103.33 103.33-178L576-248l-57.67 100q126-14.33 210.5-109t84.5-223q0-17.67-1.83-33.83-1.83-16.17-5.83-32.84H874q3 16.67 4.5 33.17T880-480q0 140.33-86.5 249.17Q707-122 571.33-90.33L628-57 594.67 0Z"/>
+                    <local:NavButton NavLink="/View/TabelaAgendamentosConcluidoView.xaml" StatusFiltro="Concluído" IconFill="#28a745" Foreground="#28a745" HoverFill="#28a745" SelectedFill="#28a745" NavText="Concluído" FontWeight="Bold" Margin="3,40,3,0" Padding="6,6,6,0" Width="130" Height="40" Icon="M379.33-244 154-469.33 201.67-517l177.66 177.67 378.34-378.34L805.33-670l-426 426Z"/>
+                    <local:NavButton NavLink="/View/TabelaAgendamentosCanceladoView.xaml" StatusFiltro="Cancelado" IconFill="Red" Foreground="Red" HoverFill="Red" SelectedFill="Red" NavText="Cancelado" FontWeight="Bold" Margin="3,40,3,0" Padding="6,6,6,0" Width="130" Height="40" Icon="m332-285.33 148-148 148 148L674.67-332l-148-148 148-148L628-674.67l-148 148-148-148L285.33-628l148 148-148 148L332-285.33ZM480-80q-82.33 0-155.33-31.5-73-31.5-127.34-85.83Q143-251.67 111.5-324.67T80-480q0-83 31.5-156t85.83-127q54.34-54 127.34-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 82.33-31.5 155.33-31.5 73-85.5 127.34Q709-143 636-111.5T480-80Zm0-66.67q139.33 0 236.33-97.33t97-236q0-139.33-97-236.33t-236.33-97q-138.67 0-236 97-97.33 97-97.33 236.33 0 138.67 97.33 236 97.33 97.33 236 97.33ZM480-480Z"/>
+
+                </ListBox>
+
+            </Grid>
+
+            <Grid>
+                <Frame x:Name="frameTabelas" Margin="50,672,50,50" NavigationUIVisibility="Hidden" Background="#1C1C1C"/>
+            </Grid>
+
         </Grid>
-
-        <Grid Width="Auto" Height="100" Margin="50,200,50,50" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="600"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <ListBox x:Name="lbTabelas" Grid.Column="0" SelectionMode="Single" SelectionChanged="lbTabelas_SelectionChanged" Background="#1C1C1C" BorderBrush="Gray" BorderThickness="0,0,0,1" VerticalAlignment="Center">
-                <!-- Define o painel de itens como um StackPanel horizontal -->
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-
-                <!-- Adiciona os botões de navegação -->
-                <local:NavButton NavLink="/View/TabelaAgendamentosPendenteView.xaml" StatusFiltro="Pendente" IconFill="#FFC107" Foreground="#FFC107" HoverFill="#FFC107" SelectedFill="#FFC107" NavText="Pendente" FontWeight="Bold" Margin="3,40,3,0" Padding="6,6,6,0" Width="130" Height="40" Icon="M360-840v-80h240v80H360Zm80 440h80v-240h-80v240Zm40 320q-74 0-139.5-28.5T226-186q-49-49-77.5-114.5T120-440q0-74 28.5-139.5T226-694q49-49 114.5-77.5T480-800q62 0 119 20t107 58l56-56 56 56-56 56q38 50 58 107t20 119q0 74-28.5 139.5T734-186q-49 49-114.5 77.5T480-80Zm0-80q116 0 198-82t82-198q0-116-82-198t-198-82q-116 0-198 82t-82 198q0 116 82 198t198 82Zm0-280Z"/>
-                <local:NavButton NavLink="/View/TabelaAgendamentosEmAndamentoView.xaml" StatusFiltro="Em Andamento" IconFill="#2979FF" Foreground="#2979FF" HoverFill="#2979FF" SelectedFill="#2979FF" NavText="Em Andamento" FontWeight="Bold" Margin="3,40,3,0" Padding="6,6,6,0" Width="150" Height="40" Icon="M339.33-105q-114-42.67-186.66-143.67-72.67-101-72.67-231 0-30 3.83-59.66Q87.67-569 97-597.67L39-564 5.67-621l179-103.33 103.33 178L230-513l-56.67-97.33q-13 31-19.83 63.66-6.83 32.67-6.83 67 0 109.67 63.33 195.84 63.33 86.16 163.33 120.16l-34 58.67Zm294-508.33V-680h113Q699-743 629-778.17q-70-35.16-149-35.16-64.33 0-120.33 22.33t-100.34 62l-34-59.33q52.67-43 117.34-67.34Q407.33-880 480-880q85 0 160.67 33.5Q716.33-813 773.33-751v-69H840v206.67H633.33ZM594.67 0l-179-103.33 103.33-178L576-248l-57.67 100q126-14.33 210.5-109t84.5-223q0-17.67-1.83-33.83-1.83-16.17-5.83-32.84H874q3 16.67 4.5 33.17T880-480q0 140.33-86.5 249.17Q707-122 571.33-90.33L628-57 594.67 0Z"/>
-                <local:NavButton NavLink="/View/TabelaAgendamentosConcluidoView.xaml" StatusFiltro="Concluído" IconFill="#28a745" Foreground="#28a745" HoverFill="#28a745" SelectedFill="#28a745" NavText="Concluído" FontWeight="Bold" Margin="3,40,3,0" Padding="6,6,6,0" Width="130" Height="40" Icon="M379.33-244 154-469.33 201.67-517l177.66 177.67 378.34-378.34L805.33-670l-426 426Z"/>
-                <local:NavButton NavLink="/View/TabelaAgendamentosCanceladoView.xaml" StatusFiltro="Cancelado" IconFill="Red" Foreground="Red" HoverFill="Red" SelectedFill="Red" NavText="Cancelado" FontWeight="Bold" Margin="3,40,3,0" Padding="6,6,6,0" Width="130" Height="40" Icon="m332-285.33 148-148 148 148L674.67-332l-148-148 148-148L628-674.67l-148 148-148-148L285.33-628l148 148-148 148L332-285.33ZM480-80q-82.33 0-155.33-31.5-73-31.5-127.34-85.83Q143-251.67 111.5-324.67T80-480q0-83 31.5-156t85.83-127q54.34-54 127.34-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 82.33-31.5 155.33-31.5 73-85.5 127.34Q709-143 636-111.5T480-80Zm0-66.67q139.33 0 236.33-97.33t97-236q0-139.33-97-236.33t-236.33-97q-138.67 0-236 97-97.33 97-97.33 236.33 0 138.67 97.33 236 97.33 97.33 236 97.33ZM480-480Z"/>
-
-            </ListBox>
-
-        </Grid>
-
-        <Grid>
-            <Frame x:Name="frameTabelas" Margin="50,672,50,50" NavigationUIVisibility="Hidden" Background="#1C1C1C"/>
-        </Grid>
-
-    </Grid>
+    </ScrollViewer>
 </Page>

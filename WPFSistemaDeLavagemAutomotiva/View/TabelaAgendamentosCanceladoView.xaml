@@ -24,6 +24,8 @@
                       HeadersVisibility="Column"
                       RowHeight="30"
                       Margin="10"
+                      VerticalAlignment="Top"
+                      Height="300"
                       BorderThickness="0"
                       > 
 

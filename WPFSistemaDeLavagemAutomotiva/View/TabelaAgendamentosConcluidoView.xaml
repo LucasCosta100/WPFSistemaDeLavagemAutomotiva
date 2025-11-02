@@ -23,6 +23,8 @@
                       GridLinesVisibility="All"
                       HeadersVisibility="Column"
                       RowHeight="30"
+                      VerticalAlignment="Top"
+                      Height="300"
                       Margin="10"
                       BorderThickness="0"
                         >

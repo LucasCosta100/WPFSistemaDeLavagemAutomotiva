@@ -119,6 +119,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controller\AgendamentosController.cs" />
     <Compile Include="Service\AgendamentoService.cs" />
     <Compile Include="Service\EnderecoService.cs" />
     <Compile Include="Service\FuncionarioService.cs" />
