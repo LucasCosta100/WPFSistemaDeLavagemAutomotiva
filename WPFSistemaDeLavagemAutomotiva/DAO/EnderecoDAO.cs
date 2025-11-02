@@ -8,7 +8,7 @@ using MySqlConnector;
 using WPFSistemaDeLavagemAutomotiva.Database;
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class EnderecoDAO : IEnderecoDAO //Implementação da interface IEnderecoDAO
+    public class EnderecoDAO
     {
         public void Salvar(Endereco endereco)//Método para salvar endereco no banco de dados
         {

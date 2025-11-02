@@ -76,8 +76,8 @@
                     </DataGridTextColumn>
 
                     <DataGridTextColumn Header="Serviços" Binding="{Binding NomeServico}" Width="*"/>
-                    <DataGridTextColumn Header="Valor" Binding="{Binding Valor}" Width="*"/>
-                    <DataGridTextColumn Header="Ativo" Binding="{Binding Ativo}" Width="*"/>
+                    <DataGridTextColumn Header="Valor" Binding="{Binding Valor}" Width="120"/>
+                    <DataGridTextColumn Header="Ativo" Binding="{Binding Ativo}" Width="120"/>
                     <DataGridTemplateColumn Header="Ações" Width="120">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

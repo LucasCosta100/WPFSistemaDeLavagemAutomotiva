@@ -11,33 +11,33 @@ using WPFSistemaDeLavagemAutomotiva.Models;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class ClienteDAO : IClienteDAO
+    public class ClienteDAO : IClienteDAO//Implementação da interface IClienteDAO
     {
-        public void Salvar(Cliente cliente)
+        public void Salvar(Cliente cliente)//Método para salvar cliente no banco de dados
         {
             try
             {
-                using (MySqlConnection conn = Conexao.ObterConexao())
+                using (MySqlConnection conn = Conexao.ObterConexao())//Usa a conexão com o banco de dados
                 {
                     string sql = "INSERT INTO clientes (id_cliente, nome, email, telefone, ativo, id_endereco) VALUES (@id, @nome, @email, @telefone, @ativo, @endereco)";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);//Comando SQL para inserir os dados do cliente
                     cmd.Parameters.AddWithValue("@nome", cliente.IdCliente);
                     cmd.Parameters.AddWithValue("@email", cliente.Email);
                     cmd.Parameters.AddWithValue("@telefone", cliente.Telefone);
                     cmd.Parameters.AddWithValue("@ativo", true);
                     cmd.Parameters.AddWithValue("@endereco", cliente.EnderecoCliente.IdEndereco);
                     conn.Open();
-                    cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();//Executa o comando SQL
                 }
 
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao salvar cliente: " + ex.Message);
+                throw new Exception("Erro ao salvar cliente: " + ex.Message);//Tratamento de erro
             }
         }
 
-        public void Atualizar(Cliente cliente)
+        public void Atualizar(Cliente cliente)//Método para atualizar cliente no banco de dados
         {
             try
             {
@@ -61,7 +61,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void Desativar(Cliente cliente)
+        public void Desativar(Cliente cliente)//Método para deletar cliente no banco de dados
         {
             try
             {
@@ -81,7 +81,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public Cliente BuscarPorCodigo(int idCliente)
+        public Cliente BuscarPorCodigo(int idCliente)//Método para buscar cliente pelo ID no banco de dados
         {
             try
             {
@@ -94,7 +94,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
 
                     conn.Open();
 
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (MySqlDataReader reader = cmd.ExecuteReader())//Lê os dados do banco de dados
                     {
                         if (reader.Read())
                         {
@@ -124,48 +124,9 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             return null;
         }
 
-        public Cliente BuscarPorNome(string nome)
-        {
-            try
-            {
-                using (MySqlConnection conn = Conexao.ObterConexao())
-                {
-                    EnderecoDAO enderecoDAO = new EnderecoDAO();
-                    string sql = "SELECT * FROM clientes WHERE nome = @nome";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@nome", "%" + nome + "%");
-                    conn.Open();
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            int idxEndereco = reader.GetOrdinal("id_endereco");
-                            Endereco endereco = reader.IsDBNull(idxEndereco) ? null
-                                : enderecoDAO.BuscarPorCodigo(reader.GetInt32(idxEndereco));
-                            Cliente client = new Cliente()
-                            {
-                                IdCliente = reader.GetInt32(reader.GetOrdinal("id_cliente")),
-                                Nome = reader.GetString(reader.GetOrdinal("nome")),
-                                Email = reader.GetString(reader.GetOrdinal("email")),
-                                Telefone = reader.GetString(reader.GetOrdinal("telefone")),
-                                Ativo = reader.GetBoolean(reader.GetOrdinal("ativo")),
-                                EnderecoCliente = endereco
-                            };
-                            return client;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao buscar cliente por nome: " + ex.Message);
-            }
-            return null;
-        }
-
         public List<Cliente> BuscarTodos()
         {
-            List<Cliente> clientes = new List<Cliente>();
+            List<Cliente> clientes = new List<Cliente>();//Lista para armazenar os clientes
             try
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
@@ -175,9 +136,9 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                     conn.Open();
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (MySqlDataReader reader = cmd.ExecuteReader())//Lê os dados do banco de dados
                     {
-                        while (reader.Read())
+                        while (reader.Read())//Enquanto houver dados para ler
                         {
                             int idxEndereco = reader.GetOrdinal("id_endereco");
                             Endereco endereco = reader.IsDBNull(idxEndereco) ? null
