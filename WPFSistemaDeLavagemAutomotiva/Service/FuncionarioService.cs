@@ -17,7 +17,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             _funcionarioDAO = new FuncionarioDAO();
         }
 
-        public void SalvarFuncionario(Funcionario funcionario)
+        public void SalvarFuncionario(Funcionario funcionario)//Método para salvar funcionário com validações
         {
             //Validações básicas usando o try e catch
             if (string.IsNullOrWhiteSpace(funcionario.Nome))
@@ -29,7 +29,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             _funcionarioDAO.Salvar(funcionario);
         }
 
-        public void AtualizarFuncionario(Funcionario funcionario)
+        public void AtualizarFuncionario(Funcionario funcionario)//Método para atualizar funcionário com validações
         {
             if (string.IsNullOrWhiteSpace(funcionario.Nome))
                 throw new ArgumentException("O nome do funcionário não pode estar vazio.");
@@ -40,7 +40,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             _funcionarioDAO.Atualizar(funcionario);
         }
 
-        public void DesativarFuncionario(Funcionario funcionario)
+        public void DesativarFuncionario(Funcionario funcionario)//Método para desativar funcionário com validações
         {
             var funcionarioExistente = _funcionarioDAO.BuscarPorCodigo(funcionario.IdFuncionario);
 
@@ -53,7 +53,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             _funcionarioDAO.Atualizar(funcionario);
         }
 
-        public void AtivarFuncionario(Funcionario funcionario)
+        public void AtivarFuncionario(Funcionario funcionario)//Método para ativar funcionário com validações
         {
             var funcionarioExistente = _funcionarioDAO.BuscarPorCodigo(funcionario.IdFuncionario);
             if (funcionario.Ativo)
@@ -64,7 +64,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             _funcionarioDAO.Atualizar(funcionario);
         }
 
-        public Funcionario BuscarPorCodigo(int idFuncionario)
+        public Funcionario BuscarPorCodigo(int idFuncionario)//Método para buscar funcionário por código com validações
         {
             if (idFuncionario <= 0)
                 throw new ArgumentException("ID inválido.");
@@ -73,7 +73,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             return _funcionarioDAO.BuscarPorCodigo(idFuncionario);
         }
 
-        public List<Funcionario> ListarFuncionarios()
+        public List<Funcionario> ListarFuncionarios()//Método para listar todos os funcionários com validações
         {
             if (_funcionarioDAO.BuscarTodos() == null || _funcionarioDAO.BuscarTodos().Count == 0)
                 throw new Exception("Nenhum funcionário encontrado.");
