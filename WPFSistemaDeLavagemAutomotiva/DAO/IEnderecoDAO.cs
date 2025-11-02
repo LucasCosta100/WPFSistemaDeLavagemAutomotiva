@@ -7,7 +7,7 @@ using WPFSistemaDeLavagemAutomotiva.Models;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public interface IEnderecoDAO
+    public interface IEnderecoDAO//Interface para operações de Endereço
     {
         void Salvar(Endereco endereco);
         void Atualizar(Endereco endereco);

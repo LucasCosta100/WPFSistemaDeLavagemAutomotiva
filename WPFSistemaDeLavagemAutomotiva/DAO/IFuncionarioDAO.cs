@@ -7,7 +7,7 @@ using WPFSistemaDeLavagemAutomotiva.Models;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public interface IFuncionarioDAO
+    public interface IFuncionarioDAO//Interface para operações de Funcionário
     {
         void Salvar(Funcionario funcionario);
         void Atualizar(Funcionario funcionario);

@@ -7,7 +7,7 @@ using WPFSistemaDeLavagemAutomotiva.Models;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public interface IAgendamentoDAO
+    public interface IAgendamentoDAO//Interface para operações de Agendamento
     {
         void Salvar(Agendamento agendamento);
         void Atualizar(Agendamento agendamento);

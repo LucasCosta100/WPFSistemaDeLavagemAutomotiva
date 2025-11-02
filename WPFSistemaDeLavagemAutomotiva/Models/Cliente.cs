@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace WPFSistemaDeLavagemAutomotiva.Models
 {
     public class Cliente
-    {
+    {   //Atributos e Propriedades
         private int _idCliente;
         public int IdCliente
         {
@@ -52,13 +52,13 @@ namespace WPFSistemaDeLavagemAutomotiva.Models
         }
 
 
-        public Cliente()
+        public Cliente() //Construtor Padrão
         {
 
         }
         
         public Cliente(int idCliente, string nome, string email, string telefone, bool ativo, Endereco endereco)
-        {
+        {   //Construtor com Parâmetros
             this._idCliente = idCliente;
             this._nome = nome;
             this._email = email;
