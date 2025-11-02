@@ -18,7 +18,7 @@ namespace WPFSistemaDeLavagemAutomotiva
             _clienteDAO = new ClienteDAO();
         }
 
-        public void SalvarCliente(Cliente cliente)
+        public void SalvarCliente(Cliente cliente)//Método para salvar cliente com validações
         {
             //Validações básicas usando o try e catch
 
@@ -43,7 +43,7 @@ namespace WPFSistemaDeLavagemAutomotiva
             _clienteDAO.Salvar(cliente);
         }
 
-        public void AtualizarCliente(Cliente cliente)
+        public void AtualizarCliente(Cliente cliente)//Método para atualizar cliente com validações
         {
             if (cliente.Telefone.Length < 10)
                 throw new ArgumentException("O telefone deve conter pelo menos 10 dígitos.");
@@ -69,7 +69,7 @@ namespace WPFSistemaDeLavagemAutomotiva
             _clienteDAO.Atualizar(cliente);
         }
 
-        public void DesativarCliente(Cliente cliente)
+        public void DesativarCliente(Cliente cliente)//Método para desativar cliente com validações
         {
             if (cliente == null)
                 throw new Exception("Cliente não encontrado.");
@@ -80,7 +80,7 @@ namespace WPFSistemaDeLavagemAutomotiva
             _clienteDAO.Desativar(cliente);
         }
 
-        public void AtivarCliente(Cliente cliente)
+        public void AtivarCliente(Cliente cliente)//Método para ativar cliente com validações
         {
             var clienteExistente = _clienteDAO.BuscarPorCodigo(cliente.IdCliente);
             if (clienteExistente == null)
@@ -91,7 +91,7 @@ namespace WPFSistemaDeLavagemAutomotiva
             _clienteDAO.Atualizar(cliente);
         }
 
-        public Cliente BuscarPorCodigo(int id)
+        public Cliente BuscarPorCodigo(int id)//Método para buscar cliente por ID com validações
         {
             if (id <= 0)
                 throw new ArgumentException("ID inválido.");
@@ -101,7 +101,7 @@ namespace WPFSistemaDeLavagemAutomotiva
             return _clienteDAO.BuscarPorCodigo(id);
         }
 
-        public List<Cliente> ListarClientes()
+        public List<Cliente> ListarClientes()//Método para listar todos os clientes com validações
         {
             if (_clienteDAO.BuscarTodos() == null || _clienteDAO.BuscarTodos().Count == 0)
                 throw new Exception("Nenhum cliente encontrado.");

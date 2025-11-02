@@ -11,16 +11,16 @@ using MySqlConnector;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class AgendamentoDAO : IAgendamentoDAO
-    {
-        public void Salvar(Agendamento agendamento)
+    public class AgendamentoDAO : IAgendamentoDAO//Implementação da interface IAgendamentoDAO
+    {   
+        public void Salvar(Agendamento agendamento)//Método para salvar agendamento no banco de dados
         {
             try
             {
-                using (MySqlConnection conn = Conexao.ObterConexao())
+                using (MySqlConnection conn = Conexao.ObterConexao())//Usa a conexão com o banco de dados
                 {
                     string sql = "INSERT INTO agendamentos (id_cliente, id_servico, data_agendamento, hora_agendamento, status_servico, valor_total, ativo) VALUES (@cliente, @servico, @data, @hora, @status, @valor, @ativo)";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);//Comando SQL para inserir os dados do agendamento
                     cmd.Parameters.AddWithValue("@cliente", agendamento.ClienteAgendado.IdCliente);
                     cmd.Parameters.AddWithValue("@servico", agendamento.ServicoAgendado.IdServico);
                     cmd.Parameters.AddWithValue("@data", agendamento.DataAgendada);
@@ -32,16 +32,16 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Agendamento salvo com sucesso!");
+                    MessageBox.Show("Agendamento salvo com sucesso!");//Mensagem de sucesso
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao salvar agendamento: " + ex.Message);
+                throw new Exception("Erro ao salvar agendamento: " + ex.Message);//Tratamento de erro
             }
         }
 
-        public void Atualizar (Agendamento agendamento)
+        public void Atualizar (Agendamento agendamento)//Método para atualizar agendamento no banco de dados
         {
             try
             {
@@ -68,7 +68,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void Desativar(Agendamento agendamento)
+        public void Desativar(Agendamento agendamento)//Método para deletar agendamento no banco de dados
         {
             try
             {
@@ -88,7 +88,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public Agendamento BuscarPorCodigo(int idAgendamento)
+        public Agendamento BuscarPorCodigo(int idAgendamento)//Método para buscar agendamento pelo ID no banco de dados
         {
             try
             {
@@ -101,9 +101,9 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     cmd.Parameters.AddWithValue("@id", idAgendamento);
 
                     conn.Open();
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (MySqlDataReader reader = cmd.ExecuteReader())//Lê os dados do banco de dados
                     {
-                        if (reader.Read())
+                        if (reader.Read())//Se encontrar o agendamento retornar os dados
                         {
                             Agendamento agendamento = new Agendamento()
                             {
@@ -132,7 +132,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public List<Agendamento> BuscarTodos()
+        public List<Agendamento> BuscarTodos()//Método para buscar todos os agendamentos no banco de dados
         {
             List<Agendamento> agendamentos = new List<Agendamento>();
             ClienteDAO clienteDAO = new ClienteDAO();
@@ -147,7 +147,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     conn.Open();
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
+                        while (reader.Read())//Enquanto houver agendamentos, adicionar na lista
                         {
                             Agendamento agendamento = new Agendamento()
                             {

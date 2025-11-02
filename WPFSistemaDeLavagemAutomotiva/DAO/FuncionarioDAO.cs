@@ -10,31 +10,31 @@ using WPFSistemaDeLavagemAutomotiva.Models;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class FuncionarioDAO : IFuncionarioDAO
+    public class FuncionarioDAO : IFuncionarioDAO//Implementação da interface IFuncionarioDAO
     {
-        public void Salvar(Funcionario funcionario)
+        public void Salvar(Funcionario funcionario)//Método para salvar funcionário no banco de dados
         {
             try
             {
-                using (MySqlConnection conn = Conexao.ObterConexao())
+                using (MySqlConnection conn = Conexao.ObterConexao())//Usa a conexão com o banco de dados
                 {
                     string sql = "INSERT INTO funcionarios (id_funcionario, nome, cargo, ativo) VALUES (@id, @nome, @cargo, @ativo)";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);//Comando SQL para inserir os dados do funcionário
                     cmd.Parameters.AddWithValue("@nome", funcionario.Nome);
                     cmd.Parameters.AddWithValue("@cargo", funcionario.Cargo);
                     cmd.Parameters.AddWithValue("@ativo", true);
 
                     conn.Open();
-                    cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();//Executa o comando SQL
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao salvar funcionário: " + ex.Message);
+                throw new Exception("Erro ao salvar funcionário: " + ex.Message);//Tratamento de erro
             }
         }
 
-        public void Atualizar(Funcionario funcionario)
+        public void Atualizar(Funcionario funcionario)//Método para atualizar funcionário no banco de dados
         {
             try
             {
@@ -57,7 +57,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void Desativar(Funcionario funcionario)
+        public void Desativar(Funcionario funcionario)//Método para deletar funcionário no banco de dados
         {
             try
             {
@@ -77,7 +77,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public Funcionario BuscarPorCodigo(int idFuncionario)
+        public Funcionario BuscarPorCodigo(int idFuncionario)//Método para buscar funcionário pelo ID no banco de dados
         {
             try
             {
@@ -89,9 +89,9 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
 
                     conn.Open();
 
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (MySqlDataReader reader = cmd.ExecuteReader())//Lê os dados do banco de dados
                     {
-                        if (reader.Read())
+                        if (reader.Read())//Se encontrar o funcionário retornar os dados
                         {
                             Funcionario func = new Funcionario()
                             {
@@ -115,9 +115,9 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public List<Funcionario> BuscarTodos()
+        public List<Funcionario> BuscarTodos()//Método para buscar todos os funcionários no banco de dados
         {
-            List<Funcionario> funcionarios = new List<Funcionario>();
+            List<Funcionario> funcionarios = new List<Funcionario>();//Lista para armazenar os funcionários
 
             using (MySqlConnection conn = Conexao.ObterConexao())
             {
@@ -128,7 +128,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                 conn.Open();
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 { 
-                    while (reader.Read())
+                    while (reader.Read())//Enquanto houver funcionários para ler
                     {
                         int idxEndereco = reader.GetOrdinal("id_endereco");
                         Endereco endereco = reader.IsDBNull(idxEndereco)

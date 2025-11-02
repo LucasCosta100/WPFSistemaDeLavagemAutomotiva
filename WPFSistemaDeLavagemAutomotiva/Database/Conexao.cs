@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace WPFSistemaDeLavagemAutomotiva.Database
 {
-    public class Conexao
+    public class Conexao //Classe para gerenciar a conexão com o banco de dados MySQL
     {
         private static string servidor = "localhost";
         private static string banco = "db_lavagem";

@@ -6,36 +6,35 @@ using System.Threading.Tasks;
 using WPFSistemaDeLavagemAutomotiva.Database;
 using WPFSistemaDeLavagemAutomotiva.Models;
 using MySqlConnector;
-using WPFSistemaDeLavagemAutomotiva.DAO;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class ServicoDAO : IServicoDAO
+    public class ServicoDAO : IServicoDAO //Implementação da interface IServicoDAO
     {
-        public void Salvar(Servico servico)
+        public void Salvar(Servico servico)//Método para salvar serviço no banco de dados
         {
             try
             {
-                using (MySqlConnection conn = Conexao.ObterConexao())
+                using (MySqlConnection conn = Conexao.ObterConexao())//Usa a conexão com o banco de dados
                 {
                     string sql = "INSERT INTO servicos (id_servico, servico, valor, ativo) VALUES (@id, @servico, @valor, @ativo)";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);//Comando SQL para inserir os dados do serviço
                     cmd.Parameters.AddWithValue("@nome", servico.NomeServico);
                     cmd.Parameters.AddWithValue("@descricao", servico.Valor);
                     cmd.Parameters.AddWithValue("@ativo", true);
 
                     conn.Open();
-                    cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();//Executa o comando SQL
                 }
 
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao salvar serviço: " + ex.Message);
+                throw new Exception("Erro ao salvar serviço: " + ex.Message);//Tratamento de erro
             }
         }
 
-        public void Atualizar(Servico servico)
+        public void Atualizar(Servico servico)//Método para atualizar serviço no banco de dados
         {
             try
             {
@@ -57,7 +56,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public void Desativar(Servico servico)
+        public void Desativar(Servico servico)//Método para deletar serviço no banco de dados
         {
             try
             {
@@ -76,7 +75,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                 throw new Exception("Erro ao deletar serviço: " + ex.Message);
             }
         }
-        public Servico BuscarPorCodigo(int idServico)
+        public Servico BuscarPorCodigo(int idServico)//Método para buscar serviço por código no banco de dados
         {
             try
             {
@@ -86,9 +85,9 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@id", idServico);
                     conn.Open();
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (MySqlDataReader reader = cmd.ExecuteReader())//Lê os dados do banco de dados
                     {
-                        if (reader.Read())
+                        if (reader.Read())//Se encontrar o IdServico retornar os dados
                         {
                             Servico servico = new Servico()
                             {
@@ -112,9 +111,9 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public List<Servico> BuscarTodos()
+        public List<Servico> BuscarTodos()//Método para buscar todos os serviços no banco de dados
         {
-            List<Servico> servicos = new List<Servico>();
+            List<Servico> servicos = new List<Servico>();//Monta a lista de serviços
             try
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
@@ -124,7 +123,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     conn.Open();
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
+                        while (reader.Read())//Enquanto houver serviços, adicionar na lista
                         {
                             Servico servico = new Servico()
                             {
@@ -144,5 +143,6 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                 throw new Exception("Erro ao selecionar tabela " + ex.Message);
             }
         }
+
     }
 }
