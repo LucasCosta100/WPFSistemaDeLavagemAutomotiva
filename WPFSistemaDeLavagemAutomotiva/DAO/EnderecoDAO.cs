@@ -6,19 +6,18 @@ using System.Threading.Tasks;
 using WPFSistemaDeLavagemAutomotiva.Models;
 using MySqlConnector;
 using WPFSistemaDeLavagemAutomotiva.Database;
-
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class EnderecoDAO : IEnderecoDAO
+    public class EnderecoDAO : IEnderecoDAO //Implementação da interface IEnderecoDAO
     {
-        public void Salvar(Endereco endereco)
+        public void Salvar(Endereco endereco)//Método para salvar endereco no banco de dados
         {
             try
             {
-                using (MySqlConnection conn = Conexao.ObterConexao())
+                using (MySqlConnection conn = Conexao.ObterConexao())//Usa a conexão com o banco de dados
                 {
                     string sql = "INSERT INTO enderecos (rua, numero, complemento, bairro, cidade, estado, cep) VALUES (@rua, @numero, @complemento, @bairro, @cidade, @estado, @cep)";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);//Comando SQL para inserir os dados do endereco
                     cmd.Parameters.AddWithValue("@rua", endereco.Rua);
                     cmd.Parameters.AddWithValue("@numero", endereco.Numero);
                     cmd.Parameters.AddWithValue("@complemento", endereco.Complemento);
@@ -27,16 +26,16 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     cmd.Parameters.AddWithValue("@estado", endereco.Estado);
                     cmd.Parameters.AddWithValue("@cep", endereco.Cep);
                     conn.Open();
-                    cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();//Executa o comando SQL
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao salvar endereco: " + ex.Message);
+                throw new Exception("Erro ao salvar endereco: " + ex.Message);//Tratamento de erro
             }
         }
 
-        public void Atualizar(Endereco endereco)
+        public void Atualizar(Endereco endereco)//Método para atualizar endereco no banco de dados
         {
             try
             {
@@ -62,7 +61,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public Endereco BuscarPorCodigo(int idEndereco)
+        public Endereco BuscarPorCodigo(int idEndereco)//Método para buscar endereco pelo ID no banco de dados
         {
             try
             {
@@ -72,9 +71,9 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@id", idEndereco);
                     conn.Open();
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (MySqlDataReader reader = cmd.ExecuteReader())//Lê os dados do banco de dados
                     {
-                        if (reader.Read())
+                        if (reader.Read())//Se encontrar o IdEndereco retornar os dados
                         {
                             Endereco endereco = new Endereco
                             {
@@ -102,9 +101,9 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
-        public List<Endereco> BuscarTodos()
+        public List<Endereco> BuscarTodos()//Método para buscar todos os enderecos no banco de dados
         {
-            List<Endereco> enderecos = new List<Endereco>();
+            List<Endereco> enderecos = new List<Endereco>();//Lista para armazenar os enderecos
             try
             {
                 using (MySqlConnection conn = Conexao.ObterConexao())
@@ -114,7 +113,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     conn.Open();
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
+                        while (reader.Read())//Lê os dados do banco de dados
                         {
                             Endereco endereco = new Endereco
                             {

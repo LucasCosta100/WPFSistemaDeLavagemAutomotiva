@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFSistemaDeLavagemAutomotiva.Service;
 
 namespace WPFSistemaDeLavagemAutomotiva.View
 {
@@ -20,9 +21,19 @@ namespace WPFSistemaDeLavagemAutomotiva.View
     /// </summary>
     public partial class FuncionariosView : Page
     {
+        FuncionarioService funcionarioService = new FuncionarioService();
         public FuncionariosView()
         {
             InitializeComponent();
+            CadastrarFuncionario();
+        }
+
+        private void CadastrarFuncionario()
+        {
+            dgFuncionario.Items.Clear();
+            var ListarFuncionarios = funcionarioService.ListarFuncionarios();
+            dgFuncionario.ItemsSource = ListarFuncionarios;
+            tbTotalFuncionarios.Text = $"Total de Funcionários: {ListarFuncionarios.Count().ToString()}";
         }
     }
 }

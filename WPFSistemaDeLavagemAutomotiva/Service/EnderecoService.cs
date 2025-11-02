@@ -17,21 +17,20 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             _enderecoDAO = new EnderecoDAO();
         }
 
-        public void SalvarEndereco(Endereco endereco)
+        public void SalvarEndereco(Endereco endereco)//Método para salvar endereço com validação
         {
             if(string.IsNullOrEmpty(endereco.Rua) || string.IsNullOrEmpty(endereco.Cidade) || string.IsNullOrEmpty(endereco.Estado))
                 throw new Exception("Endereço incompleto. Rua, cidade e estado são obrigatórios.");
             _enderecoDAO.Salvar(endereco);
         }
 
-        public void AtualizarEndereco(Endereco endereco)
-        {
+        public void AtualizarEndereco(Endereco endereco)//Método para atualizar endereço com validação
             if(string.IsNullOrEmpty(endereco.Rua) || string.IsNullOrEmpty(endereco.Cidade) || string.IsNullOrEmpty(endereco.Estado))
                 throw new Exception("Endereço incompleto. Rua, cidade e estado são obrigatórios.");
             _enderecoDAO.Atualizar(endereco);
         }
 
-        public Endereco BuscarPorCodigo(int id)
+        public Endereco BuscarPorCodigo(int id)//Método para buscar endereço por ID com validação
         {
             if (id <= 0)
                 throw new ArgumentException("ID inválido.");
@@ -40,7 +39,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             return _enderecoDAO.BuscarPorCodigo(id);
         }
 
-        public List<Endereco> ListarEnderecos()
+        public List<Endereco> ListarEnderecos()//Método para listar todos os endereços com validação
         {
             if (_enderecoDAO.BuscarTodos() == null || _enderecoDAO.BuscarTodos().Count == 0)
                 throw new Exception("Nenhum endereço encontrado.");
