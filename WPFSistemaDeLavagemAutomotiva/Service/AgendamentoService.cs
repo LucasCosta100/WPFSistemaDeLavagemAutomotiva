@@ -10,14 +10,14 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
 {
     public class AgendamentoService
     {
-        private readonly AgendamentoDAO _agendamentoDAO;
+        private readonly AgendamentoDAO _agendamentoDAO;//Instância do AgendamentoDAO para operações de banco de dados
 
-        public AgendamentoService()
+        public AgendamentoService()//Construtor da classe
         {
-            _agendamentoDAO = new AgendamentoDAO();
+            _agendamentoDAO = new AgendamentoDAO();//Inicializa o AgendamentoDAO
         }
 
-        public void SalvarAgendamento(Agendamento agendamento)
+        public void SalvarAgendamento(Agendamento agendamento)//Método para salvar agendamento com validações
         {
             //Validações básicas usando o try e catch
             if (agendamento.DataAgendada < DateTime.Now)
@@ -39,7 +39,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             _agendamentoDAO.Salvar(agendamento);
         }
 
-        public void AtualizarAgendamento(Agendamento agendamento)
+        public void AtualizarAgendamento(Agendamento agendamento)//Método para atualizar agendamento com validações
         {
             if (agendamento.DataAgendada < DateTime.Now)
                 throw new ArgumentException("A data e hora do agendamento não podem ser no passado.");
@@ -63,7 +63,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             _agendamentoDAO.Atualizar(agendamento);
         }
         
-        public void DesativarAgendamento(Agendamento agendamento)
+        public void DesativarAgendamento(Agendamento agendamento)//Método para desativar agendamento com validações
         {
             var agendamentoExistente = _agendamentoDAO.BuscarPorCodigo(agendamento.IdAgendamento);
             if (!agendamento.Ativo)
@@ -74,7 +74,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             _agendamentoDAO.Atualizar(agendamento);
         }
 
-        public void AtivarAgendamento(Agendamento agendamento)
+        public void AtivarAgendamento(Agendamento agendamento)//Método para ativar agendamento com validações
         {
             var agendamentoExistente = _agendamentoDAO.BuscarPorCodigo(agendamento.IdAgendamento);
             if (agendamento.Ativo)
@@ -85,7 +85,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             _agendamentoDAO.Atualizar(agendamento);
         }
 
-        public Agendamento BuscarPorCodigo(int idAgendamento)
+        public Agendamento BuscarPorCodigo(int idAgendamento)//Método para buscar agendamento por ID com validações
         {
             if (idAgendamento <= 0)
                 throw new ArgumentException("ID inválido.");
@@ -96,7 +96,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             return _agendamentoDAO.BuscarPorCodigo(idAgendamento);
         }
 
-        public List<Agendamento> ListarAgendamentos()
+        public List<Agendamento> ListarAgendamentos()//Método para listar todos os agendamentos com validações
         {
             if (_agendamentoDAO.BuscarTodos() == null || _agendamentoDAO.BuscarTodos().Count == 0)
                 throw new Exception("Nenhum agendamento encontrado.");

@@ -7,7 +7,7 @@ using WPFSistemaDeLavagemAutomotiva.Models;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public interface IServicoDAO
+    public interface IServicoDAO//Interface para operações de Serviço
     {
         void Salvar(Servico servico);
         void Atualizar(Servico servico);

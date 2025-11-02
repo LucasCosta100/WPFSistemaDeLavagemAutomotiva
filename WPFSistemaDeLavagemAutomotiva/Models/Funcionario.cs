@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace WPFSistemaDeLavagemAutomotiva.Models
 {
     public class Funcionario
-    {
+    {   //Atributos e propriedades
         private int _idFuncionario;
         public int IdFuncionario
         {
@@ -43,12 +43,12 @@ namespace WPFSistemaDeLavagemAutomotiva.Models
             set { _endereco = value; }
         }
 
-        public Funcionario()
+        public Funcionario() //Construtor Padrão
         {
         }
 
         public Funcionario(int idFuncionario, string nome, string cargo, bool ativo, Endereco endereco)
-        {
+        {   //Construtor com parâmetros
             this._idFuncionario = idFuncionario;
             this._nome = nome;
             this._cargo = cargo;

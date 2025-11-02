@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace WPFSistemaDeLavagemAutomotiva.Models
 {
    public class Agendamento
-   {
+    {   //Atributos e Propriedades
         private int _idAgendamento;
         public int IdAgendamento
         {
@@ -61,10 +61,10 @@ namespace WPFSistemaDeLavagemAutomotiva.Models
             set { _ativo = value; }
         }
 
-        public Agendamento() { }
+        public Agendamento() { } // Contrutor padrão
 
         public Agendamento(int idAgendamento, Cliente cliente, Servico servico, DateTime dataAgendada, TimeSpan horaAgendamento, string statusServico, double valorTotal, bool ativo)
-        {
+        {   // Construtor com parâmetros
             this._idAgendamento = idAgendamento;
             this._cliente = cliente;
             this._servico = servico;

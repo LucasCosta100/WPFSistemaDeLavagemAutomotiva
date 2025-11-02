@@ -7,7 +7,7 @@ using WPFSistemaDeLavagemAutomotiva.Models;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public interface IClienteDAO
+    public interface IClienteDAO//Interface para operações de Cliente
     {
         void Salvar(Cliente cliente);
         void Atualizar(Cliente cliente);
