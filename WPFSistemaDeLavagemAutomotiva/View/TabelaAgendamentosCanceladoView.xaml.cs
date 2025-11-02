@@ -17,22 +17,23 @@ using WPFSistemaDeLavagemAutomotiva.Service;
 namespace WPFSistemaDeLavagemAutomotiva.View
 {
     /// <summary>
-    /// Interação lógica para ServicosView.xam
+    /// Interação lógica para TabelaAgendamentosCanceladoView.xam
     /// </summary>
-    public partial class ServicosView : Page
+    public partial class TabelaAgendamentosCanceladoView : Page
     {
-        private ServicoService _servicoService = new ServicoService();
-        public ServicosView()
+        AgendamentoService agendamentoService = new AgendamentoService();
+        public TabelaAgendamentosCanceladoView()
         {
             InitializeComponent();
-            CarregarServicos();
+            CarregarTabela();
         }
 
-        public void CarregarServicos()
+        public void CarregarTabela()
         {
-            dgServicos.Items.Clear();
-            var listarServicos = _servicoService.ListarServicos();
-            dgServicos.ItemsSource = listarServicos;
+            dgAgendamentosCancelado.Items.Clear();
+            var listarAgendamentosCancelados = agendamentoService.ListarAgendamentosPorStatus("Cancelado");
+            dgAgendamentosCancelado.ItemsSource = listarAgendamentosCancelados;
+
         }
     }
 }

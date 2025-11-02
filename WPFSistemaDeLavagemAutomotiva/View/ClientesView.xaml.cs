@@ -21,7 +21,7 @@ namespace WPFSistemaDeLavagemAutomotiva.View
     /// </summary>
     public partial class ClientesView : Page
     {
-        private ClienteDAO _clienteDAO = new ClienteDAO();
+        private ClienteService _clienteService = new ClienteService();
         public ClientesView()
         {
             InitializeComponent();
@@ -31,7 +31,7 @@ namespace WPFSistemaDeLavagemAutomotiva.View
         private void CarregarClientes()
         {
             dgClientes.Items.Clear();
-            var clientes = _clienteDAO.BuscarTodos();
+            var clientes = _clienteService.ListarClientes();
             dgClientes.ItemsSource = clientes;
             tbTotalClientes.Text = $"Total de Clientes: {clientes.Count.ToString()}";
         }

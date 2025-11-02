@@ -24,6 +24,6 @@
         </ListBox>
 
         <!--Pagina ao lado do sideframe, será usada para navegação-->
-        <Frame Grid.Column="1" x:Name="paginasnav" NavigationUIVisibility="Hidden" Background="#eff2f7"/>
+        <Frame Grid.Column="1" x:Name="paginasnav" NavigationUIVisibility="Hidden" Background="#1C1C1C"/>
     </Grid>
 </Window>

@@ -92,5 +92,13 @@ namespace WPFSistemaDeLavagemAutomotiva.View.Components
                                                                           typeof(NavButton),
                                                                           new PropertyMetadata(new SolidColorBrush(Color.FromRgb(42, 132, 241))) // #2a84f1
                                                                       );
+
+        // Permite definir um filtro de status para o botão de navegação
+        public string StatusFiltro
+        {
+            get => (string)GetValue(StatusFiltroProperty);
+            set => SetValue(StatusFiltroProperty, value);
+        }
+        public static readonly DependencyProperty StatusFiltroProperty = DependencyProperty.Register(nameof(StatusFiltro), typeof(string), typeof(NavButton), new PropertyMetadata(null));
     }
 }

@@ -136,6 +136,18 @@
     <Compile Include="View\ServicosView.xaml.cs">
       <DependentUpon>ServicosView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TabelaAgendamentosCanceladoView.xaml.cs">
+      <DependentUpon>TabelaAgendamentosCanceladoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TabelaAgendamentosConcluidoView.xaml.cs">
+      <DependentUpon>TabelaAgendamentosConcluidoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TabelaAgendamentosEmAndamentoView.xaml.cs">
+      <DependentUpon>TabelaAgendamentosEmAndamentoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TabelaAgendamentosPendenteView.xaml.cs">
+      <DependentUpon>TabelaAgendamentosPendenteView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -177,6 +189,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ServicosView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TabelaAgendamentosCanceladoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TabelaAgendamentosConcluidoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TabelaAgendamentosEmAndamentoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TabelaAgendamentosPendenteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

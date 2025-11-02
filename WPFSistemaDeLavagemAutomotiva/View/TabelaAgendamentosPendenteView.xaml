@@ -1,4 +1,4 @@
-﻿<Page x:Class="WPFSistemaDeLavagemAutomotiva.View.ServicosView"
+﻿<Page x:Class="WPFSistemaDeLavagemAutomotiva.View.TabelaAgendamentosPendenteView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,39 +6,26 @@
       xmlns:local="clr-namespace:WPFSistemaDeLavagemAutomotiva.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ServicosView">
+      Title="TabelaAgendamentosPendenteView">
 
-    <Border Background="#1C1C1C" CornerRadius="20">
-        <Grid Margin="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50" MinHeight="120"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0"  Text="Serviços" FontSize="35" Height="Auto" FontWeight="Bold" Foreground="#ECEFF1" Margin="10,10,0,5"/>
-            <Border CornerRadius="10" Background="#28a745" Width="170" Height="43" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,25,10">
-                <Button x:Name="btnAdicionarServico" Grid.Row="0" Content="Adicionar Serviço" Width="150" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Foreground="White" BorderThickness="0" FontSize="14" FontWeight="Bold"/>
-            </Border>
-            <TextBlock x:Name="tbTotalServicos" Grid.Row="1" Text="Total de Serviços: " FontSize="18" FontWeight="SemiBold" Foreground="#ECEFF1" Margin="10,0,0,0" VerticalAlignment="Center"/>
-            <TextBlock Grid.Row="1" Text="Pesquisar:" FontSize="16" FontWeight="Normal" Foreground="#ECEFF1" Margin="0,0,230,0" HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBox Grid.Row="1" Width="200" Height="30" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Center"/>
-
-            <DataGrid x:Name="dgServicos"
+    <Grid>
+        <Grid Background="#1C1C1C">
+            <DataGrid x:Name="dgAgendamentosPendente"
                         Grid.Row="2"
+                        Background="#1C1C1C"
+                        Foreground="#E0E0E0"
+                        AlternatingRowBackground="#2E2E2E"
+                        RowBackground="#252525"  
                         AutoGenerateColumns="False"
                         IsReadOnly="True"
                         CanUserAddRows="False"
                         SelectionMode="Single"
-                        Background="#1C1C1C"
-                        Foreground="#E0E0E0"
-                        AlternatingRowBackground="#2E2E2E"
-                        RowBackground="#252525"
                         GridLinesVisibility="All"
                         HeadersVisibility="Column"
                         RowHeight="30"
                         Margin="10"
                         BorderThickness="0"
-                        >
+      >
 
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
@@ -67,9 +54,33 @@
                 </Style>
 
 
+
                 <DataGrid.Columns>
 
-                    <DataGridTextColumn Header="ID" Binding="{Binding IdServico}" Width="50">
+                    <DataGridTextColumn Header="ID" Binding="{Binding IdAgendamento}" Width="30">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Cliente" Binding="{Binding ClienteAgendado.Nome}" Width="*"/>
+                    <DataGridTextColumn Header="Serviço" Binding="{Binding ServicoAgendado.NomeServico}" Width="*"/>
+                    <DataGridTextColumn Header="Data" Binding="{Binding DataAgendada, StringFormat={}{0:dd/MM/yyyy}}" Width="120">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Hora" Binding="{Binding HoraAgendamento}" Width="80">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Valor" Binding="{Binding ServicoAgendado.Valor, StringFormat=C}" Width="100">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -77,9 +88,6 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <DataGridTextColumn Header="Serviços" Binding="{Binding NomeServico}" Width="*"/>
-                    <DataGridTextColumn Header="Valor" Binding="{Binding Valor}" Width="*"/>
-                    <DataGridTextColumn Header="Ativo" Binding="{Binding Ativo}" Width="*"/>
                     <DataGridTemplateColumn Header="Ações" Width="120">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -93,7 +101,5 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-
-
-    </Border>
+    </Grid>
 </Page>

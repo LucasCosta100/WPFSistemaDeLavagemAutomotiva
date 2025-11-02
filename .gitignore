@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/WPFSistemaDeLavagemAutomotiva/View/TabelaAgendamentosView.xaml
+/WPFSistemaDeLavagemAutomotiva/View/TabelaAgendamentosView.xaml.cs
+/WPFSistemaDeLavagemAutomotiva/View/TabelaAgendamentosView.xaml
