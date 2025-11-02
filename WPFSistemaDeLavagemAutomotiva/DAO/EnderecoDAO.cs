@@ -9,7 +9,7 @@ using WPFSistemaDeLavagemAutomotiva.Database;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
-    public class EnderecoDAO
+    public class EnderecoDAO : IEnderecoDAO
     {
         public void Salvar(Endereco endereco)
         {

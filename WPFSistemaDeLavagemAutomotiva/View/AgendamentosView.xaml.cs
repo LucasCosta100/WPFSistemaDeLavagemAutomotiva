@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFSistemaDeLavagemAutomotiva.View.Components;
 
 namespace WPFSistemaDeLavagemAutomotiva.View
 {
@@ -23,6 +24,11 @@ namespace WPFSistemaDeLavagemAutomotiva.View
         public AgendamentosView()
         {
             InitializeComponent();
+        }
+
+        private void lbTabelas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selecionado = lbTabelas.SelectedItem as NavButton; // Pega o item selecionado e converte para NavButton, como NavButton herda de ListBoxItem é possível fazer essa conversão
         }
     }
 }

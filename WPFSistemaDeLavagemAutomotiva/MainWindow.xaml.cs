@@ -29,7 +29,6 @@ namespace WPFSistemaDeLavagemAutomotiva
         {
             InitializeComponent();
             this.WindowState = WindowState.Maximized;  // maximiza
-            this.Topmost = true;                       // opcional: fica acima de outras janelas
 
         }
 
