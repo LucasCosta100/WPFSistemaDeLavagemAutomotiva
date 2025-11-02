@@ -133,6 +133,9 @@
     <Compile Include="View\FuncionariosView.xaml.cs">
       <DependentUpon>FuncionariosView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TabelaAgendamentosView.xaml.cs">
+      <DependentUpon>TabelaAgendamentosView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -170,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FuncionariosView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TabelaAgendamentosView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

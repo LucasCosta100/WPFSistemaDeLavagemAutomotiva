@@ -57,6 +57,9 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
                 throw new Exception("Não é possível atualizar um agendamento inativo.");
             if (agendamento.ClienteAgendado != null && !agendamento.ClienteAgendado.Ativo)
                 throw new Exception("Não é possível agendar para um cliente inativo.");
+
+            if(agendamento.StatusServico != "Pendente" && agendamento.StatusServico != "Concluído" && agendamento.StatusServico != "Cancelado" && agendamento.StatusServico != "Em Andamento")
+                throw new Exception("Status do serviço inválido. Use 'Pendente', 'Em Andamento', 'Concluído' ou 'Cancelado'.");
             _agendamentoDAO.Atualizar(agendamento);
         }
         
@@ -99,5 +102,33 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
                 throw new Exception("Nenhum agendamento encontrado.");
             return _agendamentoDAO.BuscarTodos().Where(a => a.Ativo).ToList();
         }
+
+        public List<Agendamento> ListarAgendamentosPendente()
+        {
+            if (_agendamentoDAO.BuscarClientesPendente() == null || _agendamentoDAO.BuscarClientesPendente().Count == 0)
+                throw new Exception("Nenhum agendamento pendente encontrado.");
+            return _agendamentoDAO.BuscarClientesPendente().Where(a => a.Ativo).ToList();
+        }
+
+        public List<Agendamento> ListarAgendamentoEmAndamento()
+        {
+            if (_agendamentoDAO.BuscarClientesEmAndamento() == null || _agendamentoDAO.BuscarClientesEmAndamento().Count == 0)
+                throw new Exception("Nenhum agendamento em andamento encontrado.");
+            return _agendamentoDAO.BuscarClientesEmAndamento().Where(a => a.Ativo).ToList();
+        }
+
+        public List<Agendamento> ListarAgendamentosConcluidos()
+        {
+            if (_agendamentoDAO.BuscarClientesConcluido() == null || _agendamentoDAO.BuscarClientesConcluido().Count == 0)
+                throw new Exception("Nenhum agendamento concluído encontrado.");
+            return _agendamentoDAO.BuscarClientesConcluido().Where(a => a.Ativo).ToList();
+        }
+
+        public List<Agendamento> ListarAgendamentosCancelados()
+        {
+            if (_agendamentoDAO.BuscarClientesCancelado() == null || _agendamentoDAO.BuscarClientesCancelado().Count == 0)
+                throw new Exception("Nenhum agendamento cancelado encontrado.");
+            return _agendamentoDAO.BuscarClientesCancelado().Where(a => a.Ativo).ToList();
+        }   
     }
 }

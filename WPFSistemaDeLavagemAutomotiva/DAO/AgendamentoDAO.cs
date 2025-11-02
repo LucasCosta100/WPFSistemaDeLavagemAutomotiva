@@ -171,5 +171,13 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                 throw new Exception("Erro ao buscar todos os agendamentos: " + ex.Message);
             }
         }
+
+        public List<Agendamento> BuscarPorStatus(string status)
+        {
+            List<Agendamento> agendamentos = new List<Agendamento>();
+            ClienteDAO clienteDAO = new ClienteDAO();
+            ServicoDAO servicoDAO = new ServicoDAO();
+        }
+
     }
 }

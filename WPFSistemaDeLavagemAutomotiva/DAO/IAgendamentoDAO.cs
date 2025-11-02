@@ -14,5 +14,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
         void Desativar(Agendamento agendamento);
         Agendamento BuscarPorCodigo(int idAgendamento);
         List<Agendamento> BuscarTodos();
+
+        List<Agendamento> BuscarPorStatus(string status);
     }
 }
