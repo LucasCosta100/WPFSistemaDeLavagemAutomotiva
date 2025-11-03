@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         WindowStyle="SingleBorderWindow"
         Title="MainWindow"           
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Background="#121212">
     <Grid Background="#121212">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>

@@ -111,6 +111,42 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             }
         }
 
+        public Servico BuscarPorNome(string nomeServico)//Método para buscar serviço por nome no banco de dados
+        {
+            try
+            {
+                using (MySqlConnection conn = Conexao.ObterConexao())
+                {
+                    string sql = "SELECT * FROM servicos WHERE servico = @nome";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@nome", nomeServico);
+                    conn.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            Servico servico = new Servico()
+                            {
+                                IdServico = reader.GetInt32(reader.GetOrdinal("id_servico")),
+                                NomeServico = reader.GetString(reader.GetOrdinal("servico")),
+                                Valor = reader.GetDecimal(reader.GetOrdinal("valor")),
+                                Ativo = reader.GetBoolean(reader.GetOrdinal("ativo"))
+                            };
+                            return servico;
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao buscar serviço por nome: " + ex.Message);
+            }
+        }
+
         public List<Servico> BuscarTodos()//Método para buscar todos os serviços no banco de dados
         {
             List<Servico> servicos = new List<Servico>();//Monta a lista de serviços

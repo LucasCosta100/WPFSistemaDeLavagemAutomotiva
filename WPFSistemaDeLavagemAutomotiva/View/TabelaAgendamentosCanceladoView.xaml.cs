@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFSistemaDeLavagemAutomotiva.Controller;
+using WPFSistemaDeLavagemAutomotiva.Models;
 using WPFSistemaDeLavagemAutomotiva.Service;
 
 namespace WPFSistemaDeLavagemAutomotiva.View
@@ -21,7 +23,7 @@ namespace WPFSistemaDeLavagemAutomotiva.View
     /// </summary>
     public partial class TabelaAgendamentosCanceladoView : Page
     {
-        AgendamentoService agendamentoService = new AgendamentoService();
+        AgendamentosController agendamentosController = new AgendamentosController();
         public TabelaAgendamentosCanceladoView()
         {
             InitializeComponent();
@@ -31,9 +33,22 @@ namespace WPFSistemaDeLavagemAutomotiva.View
         public void CarregarTabela()
         {
             dgAgendamentosCancelado.Items.Clear();
-            var listarAgendamentosCancelados = agendamentoService.ListarAgendamentosPorStatus("Cancelado");
-            dgAgendamentosCancelado.ItemsSource = listarAgendamentosCancelados;
+            var (listaAgendamentosCancelados, mensagem) = agendamentosController.ListarAgendamentosPorStatus("Cancelado");
+            dgAgendamentosCancelado.ItemsSource = listaAgendamentosCancelados;
 
+        }
+
+        //Após clicar no botão editar, abre a janela de edição do agendamento selecionado e por meio do Binding passa os dados do agendamento para a janela de edição.
+        private void btnEditar_Click(object sender, RoutedEventArgs e)
+        {
+            var botao = sender as Button;
+            var agendamentoSelecionado = botao.DataContext as Models.Agendamento;
+
+            if (agendamentoSelecionado != null)
+            {
+                var janelaEditar = new EditarAgendamentoView(agendamentoSelecionado);
+                janelaEditar.ShowDialog();
+            }
         }
     }
 }

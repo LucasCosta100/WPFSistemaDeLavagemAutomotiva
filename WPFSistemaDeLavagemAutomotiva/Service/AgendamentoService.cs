@@ -12,6 +12,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
     {
         private readonly AgendamentoDAO _agendamentoDAO;//Instância do AgendamentoDAO para operações de banco de dados
 
+
         public AgendamentoService()//Construtor da classe
         {
             _agendamentoDAO = new AgendamentoDAO();//Inicializa o AgendamentoDAO
@@ -68,9 +69,11 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             var agendamentoExistente = _agendamentoDAO.BuscarPorCodigo(agendamento.IdAgendamento);
             if (!agendamento.Ativo)
                 throw new Exception("Agendamento já está inativo.");
-            agendamento.Ativo = false;
             if (agendamentoExistente == null)
                 throw new Exception("Agendamento não encontrado.");
+
+            agendamento.Ativo = false;
+            agendamento.StatusServico = "Cancelado";
             _agendamentoDAO.Atualizar(agendamento);
         }
 

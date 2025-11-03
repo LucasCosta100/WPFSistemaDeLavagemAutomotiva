@@ -19,59 +19,55 @@ namespace WPFSistemaDeLavagemAutomotiva.Controller
         }
 
         // ✅ Salvar
-        public string SalvarAgendamento(Agendamento agendamento)
+        public void SalvarAgendamento(Agendamento agendamento)
         {
             try
             {
                 _agendamentoService.SalvarAgendamento(agendamento);
-                return "Agendamento salvo com sucesso!";
             }
             catch (Exception ex)
             {
-                return "Erro ao salvar agendamento: " + ex.Message;
+                throw new Exception("Erro ao salvar agendamento: " + ex.Message);
             }
         }
 
         // ✅ Atualizar
-        public string AtualizarAgendamento(Agendamento agendamento)
+        public void AtualizarAgendamento(Agendamento agendamento)
         {
             try
             {
                 _agendamentoService.AtualizarAgendamento(agendamento);
-                return "Agendamento atualizado com sucesso!";
             }
             catch (Exception ex)
             {
-                return "Erro ao atualizar agendamento: " + ex.Message;
+                throw new Exception(ex.Message);
             }
         }
 
         // ✅ Desativar
-        public string DesativarAgendamento(Agendamento agendamento)
+        public void DesativarAgendamento(Agendamento agendamento)
         {
             try
             {
                 _agendamentoService.DesativarAgendamento(agendamento);
-                return "Agendamento desativado com sucesso!";
             }
             catch (Exception ex)
             {
-                return "Erro ao desativar agendamento: " + ex.Message;
+                throw new Exception("Erro ao desativar agendamento: " + ex.Message);
             }
         }
 
 
         // ✅ Ativar
-        public string AtivarAgendamento(Agendamento agendamento)
+        public void AtivarAgendamento(Agendamento agendamento)
         {
             try
             {
                 _agendamentoService.AtivarAgendamento(agendamento);
-                return "Agendamento ativado com sucesso!";
             }
             catch (Exception ex)
             {
-                return "Erro ao ativar agendamento: " + ex.Message;
+                throw new Exception("Erro ao ativar agendamento: " + ex.Message);
             }
 
         }
@@ -108,7 +104,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Controller
         {
        
             var hoje = DateTime.Today;
-            var lista = _agendamentoService.ListarAgendamentos().Where(a => a.DataAgendada.Date == hoje).Where(a => a.StatusServico != "Concluído").ToList();
+            var lista = _agendamentoService.ListarAgendamentos().Where(a => a.DataAgendada.Date == hoje).Where(a => a.StatusServico != "Concluído").Where(a => a.StatusServico != "Em Andamento").Where(a => a.StatusServico != "Cancelado").ToList();
             return (lista, $"Foram encontrados {lista.Count} agendamentos para hoje.");
         }
 

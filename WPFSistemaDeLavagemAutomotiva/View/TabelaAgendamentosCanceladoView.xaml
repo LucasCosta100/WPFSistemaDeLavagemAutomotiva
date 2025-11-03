@@ -94,8 +94,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="✏️" Background="Yellow"  Width="30" Margin="5 0"/>
-                                    <Button Content="🗑️" Background="Red" Width="30" Margin="5 0"/>
+                                    <Button x:Name ="btnEditar" Content="✏️" Background="Yellow"  Width="30" Margin="5 0" Tag="{Binding}" Click="btnEditar_Click"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

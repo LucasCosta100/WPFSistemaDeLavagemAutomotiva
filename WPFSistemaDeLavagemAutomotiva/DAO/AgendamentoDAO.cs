@@ -224,9 +224,12 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                 using (MySqlConnection conn = Conexao.ObterConexao())
                 {
                     //Esse código SQL permite buscar o próximo agendamento mas perto da data de "HOJE" e hora atual retornando apenas 1 valor
-                    string sql = @" SELECT * FROM agendamentos WHERE ativo = 1 AND TIMESTAMP(data_agendamento, hora_agendamento) >= NOW()
+                    string sql = @" SELECT * FROM agendamentos
+                                    WHERE ativo = 1
+                                    AND TIMESTAMP(data_agendamento, hora_agendamento) >= NOW()
+                                    AND status_servico NOT IN ('Concluído', 'Em Andamento', 'Cancelado')
                                     ORDER BY TIMESTAMP(data_agendamento, hora_agendamento) ASC
-                                    LIMIT 1";
+                                    LIMIT 1;";
 
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     conn.Open();

@@ -46,23 +46,25 @@
 
                         <!-- 🔸 StackPanel horizontal para os botões -->
                         <StackPanel x:Name="spBotoes" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15,70,15,25">
-                            <Button Content="Confirmar" 
+                            <Button x:Name="btnAtender"
+                                Content="Atender" 
                             Width="120" Height="40" 
                             Margin="0,0,10,0"
                             Background="Green" 
                             Foreground="#ECEFF1"
                             FontWeight="Bold"
                             BorderBrush="Transparent"
-                            Cursor="Hand">
+                            Cursor="Hand" Click="btnAtender_Click">
                             </Button>
 
-                            <Button Content="Cancelar" 
+                            <Button x:Name="btnCancelar"
+                            Content="Cancelar" 
                             Width="120" Height="40"
                             Background="Red"
                             Foreground="#ECEFF1"
                             FontWeight="Bold"
                             BorderBrush="Transparent"
-                            Cursor="Hand"/>
+                            Cursor="Hand" Click="btnCancelar_Click"/>
                         </StackPanel>
 
                     </StackPanel>
@@ -108,7 +110,9 @@
             <Grid>
                 <Frame x:Name="frameTabelas" Margin="50,672,50,50" NavigationUIVisibility="Hidden" Background="#1C1C1C"/>
             </Grid>
-
         </Grid>
+
+        
+
     </ScrollViewer>
 </Page>

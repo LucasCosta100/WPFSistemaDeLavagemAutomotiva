@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFSistemaDeLavagemAutomotiva.Controller;
 using WPFSistemaDeLavagemAutomotiva.Service;
 
 namespace WPFSistemaDeLavagemAutomotiva.View
@@ -21,7 +22,7 @@ namespace WPFSistemaDeLavagemAutomotiva.View
     /// </summary>
     public partial class TabelaAgendamentosConcluidoView : Page
     {
-        AgendamentoService agendamentoService = new AgendamentoService();
+        AgendamentosController agendamentosController = new AgendamentosController();
         public TabelaAgendamentosConcluidoView()
         {
             InitializeComponent();
@@ -31,8 +32,35 @@ namespace WPFSistemaDeLavagemAutomotiva.View
         public void CarregarTabelas()
         {
             dgAgendamentosConcluido.Items.Clear();
-            var listarAgendamentos = agendamentoService.ListarAgendamentosPorStatus("Concluído");
+            var (listarAgendamentos, mensagem) = agendamentosController.ListarAgendamentosPorStatus("Concluído");
             dgAgendamentosConcluido.ItemsSource = listarAgendamentos;
+        }
+
+        private void btnEditarConcluido_Click(object sender, RoutedEventArgs e)
+        {
+            var botao = sender as Button; //Pega o botão que foi clicado
+            var agendamentoSelecionado = botao.DataContext as Models.Agendamento; //Pega o agendamento associado ao botão clicado por meio do DataContext
+
+            if (agendamentoSelecionado != null)
+            {
+                var janelaEditar = new EditarAgendamentoView(agendamentoSelecionado);
+                janelaEditar.ShowDialog(); //Abre a janela de edição do agendamento selecionado
+            }
+        }
+
+        private void btnDesativarConcluido_Click(object sender, RoutedEventArgs e)
+        {
+            var resultado = MessageBox.Show("Deseja realmente desativar este agendamento?", "Confirmação", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (resultado == MessageBoxResult.Yes)
+            {
+                var botao = sender as Button; //Pega o botão que foi clicado
+                var agendamentoSelecionado = botao.DataContext as Models.Agendamento; //Pega o agendamento associado ao botão clicado por meio do DataContext
+                if (agendamentoSelecionado != null)
+                {
+                    agendamentosController.DesativarAgendamento(agendamentoSelecionado);
+                    MessageBox.Show("Agendamento desativado com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
         }
     }
 }

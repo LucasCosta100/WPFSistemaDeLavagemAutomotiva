@@ -93,8 +93,8 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="✏️" Background="Yellow"  Width="30" Margin="5 0"/>
-                                    <Button Content="🗑️" Background="Red" Width="30" Margin="5 0"/>
+                                    <Button x:Name="btnEditarConcluido" Content="✏️" Background="Yellow"  Width="30" Margin="5 0" Tag="{Binding}" Click="btnEditarConcluido_Click"/>
+                                    <Button x:Name="btnDesativarConcluido" Content="🗑️" Background="Red" Width="30" Margin="5 0" Tag="{Binding}" Click="btnDesativarConcluido_Click"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
