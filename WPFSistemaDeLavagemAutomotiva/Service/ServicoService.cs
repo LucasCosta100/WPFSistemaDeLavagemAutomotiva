@@ -17,7 +17,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             _servicoDAO = new ServicoDAO();
         }
 
-        public void SalvarServico(Servico servico)
+        public void SalvarServicos(Servico servico)
         {
             //Validações básicas usando o try e catch
             if (string.IsNullOrWhiteSpace(servico.NomeServico))
@@ -67,7 +67,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             return _servicoDAO.BuscarPorCodigo(idServico);
         }
 
-        public List<Servico> ListarServico()
+        public List<Servico> ListarServicos()
         {
             if (_servicoDAO.BuscarTodos() == null || _servicoDAO.BuscarTodos().Count == 0)
                 throw new Exception("Nenhum serviço encontrado.");

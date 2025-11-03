@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0"  Text="Serviços" FontSize="35" Height="Auto" FontWeight="Bold" Foreground="#333" Margin="10,10,0,5"/>
             <Border CornerRadius="10" Background="#28a745" Width="170" Height="43" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,25,10">
-                <Button x:Name="btnAdicionarServico" Grid.Row="0" Content="Adicionar Serviço" Width="150" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Foreground="White" BorderThickness="0" FontSize="14" FontWeight="Bold"/>
+                <Button x:Name="btnAdicionarServico" Grid.Row="0" Content="Adicionar Serviço" Width="150" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Foreground="White" BorderThickness="0" FontSize="14" FontWeight="Bold" Click="btnAdicionarServico_Click"/>
             </Border>
             <TextBlock x:Name="tbTotalServicos" Grid.Row="1" Text="Total de Serviços: " FontSize="18" FontWeight="SemiBold" Foreground="#555" Margin="10,0,0,0" VerticalAlignment="Center"/>
             <TextBlock Grid.Row="1" Text="Pesquisar:" FontSize="16" FontWeight="Normal" Foreground="#555" Margin="0,0,230,0" HorizontalAlignment="Right" VerticalAlignment="Center" />

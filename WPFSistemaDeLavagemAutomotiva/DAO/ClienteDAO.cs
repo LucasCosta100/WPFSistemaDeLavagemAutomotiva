@@ -124,6 +124,11 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
             return null;
         }
 
+        public Cliente BuscarPorNome(string nome)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Cliente> BuscarTodos()
         {
             List<Cliente> clientes = new List<Cliente>();//Lista para armazenar os clientes

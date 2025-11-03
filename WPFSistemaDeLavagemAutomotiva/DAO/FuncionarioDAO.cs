@@ -128,12 +128,13 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                 conn.Open();
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
-                    int idxEndereco = reader.GetOrdinal("id_endereco");
-                    Endereco endereco = reader.IsDBNull(idxEndereco)
-                        ? null
-                        : enderecoDAO.BuscarPorCodigo(reader.GetInt32(idxEndereco));
+                    
                     while (reader.Read())
                     {
+                        int idxEndereco = reader.GetOrdinal("id_endereco");
+                        Endereco endereco = reader.IsDBNull(idxEndereco)
+                            ? null
+                            : enderecoDAO.BuscarPorCodigo(reader.GetInt32(idxEndereco));
                         Funcionario func = new Funcionario()
                         {
                             IdFuncionario = reader.GetInt32("id_funcionario"),

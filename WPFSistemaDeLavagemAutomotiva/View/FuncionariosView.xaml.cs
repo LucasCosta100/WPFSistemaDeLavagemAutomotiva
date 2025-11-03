@@ -25,10 +25,10 @@ namespace WPFSistemaDeLavagemAutomotiva.View
         public FuncionariosView()
         {
             InitializeComponent();
-            CadastrarFuncionario();
+            ListarFuncionario();
         }
 
-        private void CadastrarFuncionario()
+        private void ListarFuncionario()
         {
             dgFuncionario.Items.Clear();
             var ListarFuncionarios = funcionarioService.ListarFuncionarios();

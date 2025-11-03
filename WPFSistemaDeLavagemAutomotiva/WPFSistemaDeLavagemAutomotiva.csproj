@@ -133,6 +133,12 @@
     <Compile Include="View\FuncionariosView.xaml.cs">
       <DependentUpon>FuncionariosView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\InicioView.xaml.cs">
+      <DependentUpon>InicioView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ServicosView.xaml.cs">
       <DependentUpon>ServicosView.xaml</DependentUpon>
     </Compile>
@@ -173,6 +179,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FuncionariosView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\InicioView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
