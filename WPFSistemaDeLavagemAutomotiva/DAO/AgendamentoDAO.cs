@@ -171,5 +171,95 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                 throw new Exception("Erro ao buscar todos os agendamentos: " + ex.Message);
             }
         }
+
+        public List<Agendamento> BuscarPorStatus(string status)
+        {
+            List<Agendamento> agendamentos = new List<Agendamento>();
+            ClienteDAO clienteDAO = new ClienteDAO();
+            ServicoDAO servicoDAO = new ServicoDAO();
+            try
+            {
+                using (MySqlConnection conn = Conexao.ObterConexao())
+                {
+                    string sql = "SELECT * FROM agendamentos WHERE status_servico = @status";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@status", status);
+                    conn.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Agendamento agendamento = new Agendamento()
+                            {
+                                IdAgendamento = reader.GetInt32(reader.GetOrdinal("id_agendamento")),
+                                ClienteAgendado = clienteDAO.BuscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_cliente"))),
+                                ServicoAgendado = servicoDAO.BuscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_servico"))),
+                                DataAgendada = (DateTime)reader["data_agendamento"],
+                                HoraAgendamento = (TimeSpan)reader["hora_agendamento"],
+                                StatusServico = reader.GetString(reader.GetOrdinal("status_servico")),
+                                ValorTotal = reader.GetDouble(reader.GetOrdinal("valor_total")),
+                                Ativo = reader.GetBoolean(reader.GetOrdinal("ativo"))
+                            };
+                            agendamentos.Add(agendamento);
+                        }
+                        return agendamentos;
+                    }
+                }
+            } catch (Exception ex)
+            {
+                throw new Exception($"Erro {ex.Message} ao buscar agendamentos com status '{status}'");
+            }
+        }
+
+
+        //Método utilizado no Border Principal da tela agendamentos
+        public Agendamento BuscarProximoAgendamento()
+        {
+            Agendamento agendamento = null;
+            ClienteDAO clienteDAO = new ClienteDAO();
+            ServicoDAO servicoDAO = new ServicoDAO();
+
+            try
+            {
+                using (MySqlConnection conn = Conexao.ObterConexao())
+                {
+                    //Esse código SQL permite buscar o próximo agendamento mas perto da data de "HOJE" e hora atual retornando apenas 1 valor
+                    string sql = @" SELECT * FROM agendamentos
+                                    WHERE ativo = 1
+                                    AND TIMESTAMP(data_agendamento, hora_agendamento) >= NOW()
+                                    AND status_servico NOT IN ('Concluído', 'Em Andamento', 'Cancelado')
+                                    ORDER BY TIMESTAMP(data_agendamento, hora_agendamento) ASC
+                                    LIMIT 1;";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    conn.Open();
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            agendamento = new Agendamento()
+                            {
+                                IdAgendamento = reader.GetInt32(reader.GetOrdinal("id_agendamento")),
+                                ClienteAgendado = clienteDAO.BuscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_cliente"))),
+                                ServicoAgendado = servicoDAO.BuscarPorCodigo(reader.GetInt32(reader.GetOrdinal("id_servico"))),
+                                DataAgendada = reader.GetDateTime(reader.GetOrdinal("data_agendamento")),
+                                HoraAgendamento = (TimeSpan)reader["hora_agendamento"],
+                                StatusServico = reader.GetString(reader.GetOrdinal("status_servico")),
+                                ValorTotal = reader.GetDouble(reader.GetOrdinal("valor_total")),
+                                Ativo = reader.GetBoolean(reader.GetOrdinal("ativo"))
+                            };
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao buscar próximo agendamento: {ex.Message}", ex);
+            }
+
+            return agendamento;
+        }
+
     }
 }

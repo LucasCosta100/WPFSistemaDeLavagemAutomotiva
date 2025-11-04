@@ -18,24 +18,21 @@ namespace WPFSistemaDeLavagemAutomotiva.View
 {
     /// <summary>
     /// Interação lógica para ServicosView.xam
-    /// </summary>metdo S
+    /// </summary>
     public partial class ServicosView : Page
     {
-        ServicoService servicoService = new ServicoService();
-
+        private ServicoService _servicoService = new ServicoService();
         public ServicosView()
         {
             InitializeComponent();
-            TodosServicos();
+            CarregarServicos();
         }
 
-        private void TodosServicos()
+        public void CarregarServicos()
         {
             dgServicos.Items.Clear();
-            var ListarServicos = servicoService.ListarServicos();
-            dgServicos.ItemsSource = ListarServicos;
-            tbTotalServicos.Text = $"Total de Serviços: {ListarServicos.Count().ToString()}";
-            tbTotalServicos.Text = $"Total de Funcionários: {ListarServicos.Count().ToString()}";
+            var listarServicos = _servicoService.ListarServicos();
+            dgServicos.ItemsSource = listarServicos;
         }
     }
 }

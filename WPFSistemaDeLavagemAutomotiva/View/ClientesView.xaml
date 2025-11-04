@@ -8,39 +8,42 @@
       d:DesignHeight="768" d:DesignWidth="1080"
       Title="ClientesView">
 
-    <Border Background="#eff2f7" CornerRadius="20">
+    <Border Background="#1C1C1C" CornerRadius="20">
         <Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" MinHeight="120"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0"  Text="Clientes" FontSize="35" Height="Auto" FontWeight="Bold" Foreground="#333" Margin="10,10,0,5"/>
+            <TextBlock Grid.Row="0"  Text="Clientes" FontSize="35" Height="Auto" FontWeight="Bold" Foreground="#ECEFF1" Margin="10,10,0,5"/>
             <Border CornerRadius="10" Background="#28a745" Width="170" Height="43" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,25,10">
                 <Button x:Name="btnAdicionarCliente" Grid.Row="0" Content="Adicionar Cliente" Width="150" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Foreground="White" BorderThickness="0" FontSize="14" FontWeight="Bold"/>
             </Border>
-            <TextBlock x:Name="tbTotalClientes" Grid.Row="1" Text="Total de clientes: " FontSize="18" FontWeight="SemiBold" Foreground="#555" Margin="10,0,0,0" VerticalAlignment="Center"/>
-            <TextBlock Grid.Row="1" Text="Pesquisar:" FontSize="16" FontWeight="Normal" Foreground="#555" Margin="0,0,230,0" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <TextBlock x:Name="tbTotalClientes" Grid.Row="1" Text="Total de clientes: " FontSize="18" FontWeight="SemiBold" Foreground="#ECEFF1" Margin="10,0,0,0" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Text="Pesquisar:" FontSize="16" FontWeight="Normal" Foreground="#ECEFF1" Margin="0,0,230,0" HorizontalAlignment="Right" VerticalAlignment="Center" />
             <TextBox Grid.Row="1" Width="200" Height="30" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Center"/>
             
             <DataGrid x:Name="dgClientes"
-                      Grid.Row="2"
-                      AutoGenerateColumns="False"
-                      IsReadOnly="True"
-                      CanUserAddRows="False"
-                      SelectionMode="Single"
-                      AlternatingRowBackground="#E8ECFF"
-                      GridLinesVisibility="All"
-                      HeadersVisibility="Column"
-                      RowHeight="30"
-                      Margin="10"
-                      BorderThickness="0"
-                      >
+                        Grid.Row="2"
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True"
+                        CanUserAddRows="False"
+                        SelectionMode="Single"
+                        Background="#1C1C1C"
+                        Foreground="#E0E0E0"
+                        AlternatingRowBackground="#2E2E2E"
+                        RowBackground="#252525" 
+                        GridLinesVisibility="All"
+                        HeadersVisibility="Column"
+                        RowHeight="30"
+                        Margin="10"
+                        BorderThickness="0"
+                        >
 
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="#026ADE"/>
-                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Foreground" Value="#FFFFFF"/>
                         <Setter Property="HorizontalContentAlignment" Value="Center"/>
                         <Setter Property="VerticalContentAlignment" Value="Center"/>
                         <Setter Property="BorderThickness" Value="0"/>
@@ -50,11 +53,11 @@
                 </DataGrid.ColumnHeaderStyle>
 
                 <Style TargetType="DataGridRow">
-                    <Setter Property="Background" Value="White"/>
-                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="#252525"/>
+                    <Setter Property="Foreground" Value="#E0E0E0"/>
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#D0E0FF"/>
+                            <Setter Property="Background" Value="#1A73E8"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Background" Value="#0240DE"/>
@@ -62,7 +65,8 @@
                         </Trigger>
                     </Style.Triggers>
                 </Style>
-                
+
+
 
 
                 <DataGrid.Columns>
@@ -93,8 +97,8 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="✏️" Background="Yellow"  Width="30" Margin="5 0"/>
-                                    <Button Content="🗑️" Background="Red" Width="30" Margin="5 0"/>
+                                    <Button x:Name="btnEditarCliente"  Content="✏️" Background="Yellow"  Width="30" Margin="5 0" Click="btnEditarCliente_Click" Tag="{Binding}"/>
+                                    <Button x:Name="btnDesativarCliente" Content="🗑️" Background="Red" Width="30" Margin="5 0" Tag="{Binding}" Click="btnDesativarCliente_Click"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
