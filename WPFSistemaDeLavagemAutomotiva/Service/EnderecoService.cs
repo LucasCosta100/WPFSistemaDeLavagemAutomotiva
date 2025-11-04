@@ -25,7 +25,8 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
         }
 
         public void AtualizarEndereco(Endereco endereco)//Método para atualizar endereço com validação
-            if(string.IsNullOrEmpty(endereco.Rua) || string.IsNullOrEmpty(endereco.Cidade) || string.IsNullOrEmpty(endereco.Estado))
+        {
+            if (string.IsNullOrEmpty(endereco.Rua) || string.IsNullOrEmpty(endereco.Cidade) || string.IsNullOrEmpty(endereco.Estado))
                 throw new Exception("Endereço incompleto. Rua, cidade e estado são obrigatórios.");
             _enderecoDAO.Atualizar(endereco);
         }

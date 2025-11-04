@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFSistemaDeLavagemAutomotiva.Service;
 
 namespace WPFSistemaDeLavagemAutomotiva.View
 {
@@ -20,9 +21,18 @@ namespace WPFSistemaDeLavagemAutomotiva.View
     /// </summary>
     public partial class ServicosView : Page
     {
+        private ServicoService _servicoService = new ServicoService();
         public ServicosView()
         {
             InitializeComponent();
+            CarregarServicos();
+        }
+
+        public void CarregarServicos()
+        {
+            dgServicos.Items.Clear();
+            var listarServicos = _servicoService.ListarServicos();
+            dgServicos.ItemsSource = listarServicos;
         }
     }
 }

@@ -12,6 +12,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
     {
         private readonly AgendamentoDAO _agendamentoDAO;//Instância do AgendamentoDAO para operações de banco de dados
 
+
         public AgendamentoService()//Construtor da classe
         {
             _agendamentoDAO = new AgendamentoDAO();//Inicializa o AgendamentoDAO
@@ -57,6 +58,9 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
                 throw new Exception("Não é possível atualizar um agendamento inativo.");
             if (agendamento.ClienteAgendado != null && !agendamento.ClienteAgendado.Ativo)
                 throw new Exception("Não é possível agendar para um cliente inativo.");
+
+            if(agendamento.StatusServico != "Pendente" && agendamento.StatusServico != "Concluído" && agendamento.StatusServico != "Cancelado" && agendamento.StatusServico != "Em Andamento")
+                throw new Exception("Status do serviço inválido. Use 'Pendente', 'Em Andamento', 'Concluído' ou 'Cancelado'.");
             _agendamentoDAO.Atualizar(agendamento);
         }
         
@@ -65,9 +69,11 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             var agendamentoExistente = _agendamentoDAO.BuscarPorCodigo(agendamento.IdAgendamento);
             if (!agendamento.Ativo)
                 throw new Exception("Agendamento já está inativo.");
-            agendamento.Ativo = false;
             if (agendamentoExistente == null)
                 throw new Exception("Agendamento não encontrado.");
+
+            agendamento.Ativo = false;
+            agendamento.StatusServico = "Cancelado";
             _agendamentoDAO.Atualizar(agendamento);
         }
 
@@ -98,6 +104,20 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             if (_agendamentoDAO.BuscarTodos() == null || _agendamentoDAO.BuscarTodos().Count == 0)
                 throw new Exception("Nenhum agendamento encontrado.");
             return _agendamentoDAO.BuscarTodos().Where(a => a.Ativo).ToList();
+        }
+
+        public List<Agendamento> ListarAgendamentosPorStatus(string status)
+        {
+            if (status != "Pendente" && status != "Concluído" && status != "Cancelado" && status != "Em Andamento")
+                throw new Exception("Status do serviço inválido. Use 'Pendente', 'Em Andamento', 'Concluído' ou 'Cancelado'.");
+            return _agendamentoDAO.BuscarPorStatus(status);
+        } 
+
+        public Agendamento BuscarProximoAgendamento()
+        {
+            if (_agendamentoDAO.BuscarProximoAgendamento() == null)
+                throw new Exception("Nenhum agendamento futuro encontrado.");
+            return _agendamentoDAO.BuscarProximoAgendamento();
         }
     }
 }
