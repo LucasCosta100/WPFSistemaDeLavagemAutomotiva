@@ -5,35 +5,49 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Windows;
 using WPFSistemaDeLavagemAutomotiva.Database;
 using WPFSistemaDeLavagemAutomotiva.Models;
+using WPFSistemaDeLavagemAutomotiva.Utils;
 
 namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
     public class FuncionarioDAO : IFuncionarioDAO//Implementação da interface IFuncionarioDAO
     {
-        public void Salvar(Funcionario funcionario)//Método para salvar funcionário no banco de dados
+        private EnderecoDAO _enderecoDAO = new EnderecoDAO();
+        public void Salvar(Funcionario funcionario)
         {
             try
             {
-                using (MySqlConnection conn = Conexao.ObterConexao())//Usa a conexão com o banco de dados
+                using (MySqlConnection conn = Conexao.ObterConexao())
                 {
-                    string sql = "INSERT INTO funcionarios (id_funcionario, nome, cargo, ativo) VALUES (@id, @nome, @cargo, @ativo)";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);//Comando SQL para inserir os dados do funcionário
+                    // Primeiro salva o endereço e pega o ID
+                    EnderecoDAO enderecoDAO = new EnderecoDAO();
+                    int idEndereco = enderecoDAO.Salvar(funcionario.Endereco);
+
+                    // Query para salvar funcionário com id_endereco e senha_hash
+                    string sql = @"
+                INSERT INTO funcionarios (nome, cargo, ativo, usuario, senha_hash, id_endereco)
+                VALUES (@nome, @cargo, @ativo, @usuario, @senha_hash, @id_endereco)";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+
                     cmd.Parameters.AddWithValue("@nome", funcionario.Nome);
                     cmd.Parameters.AddWithValue("@cargo", funcionario.Cargo);
                     cmd.Parameters.AddWithValue("@ativo", true);
+                    cmd.Parameters.AddWithValue("@usuario", funcionario.Usuario);
+                    cmd.Parameters.AddWithValue("@senha_hash", funcionario.SenhaHash); // a senha já deve vir hash
+                    cmd.Parameters.AddWithValue("@id_endereco", idEndereco);
 
                     conn.Open();
-                    cmd.ExecuteNonQuery();//Executa o comando SQL
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao salvar funcionário: " + ex.Message);//Tratamento de erro
+                throw new Exception("Erro ao salvar funcionário: " + ex.Message);
             }
         }
-
         public void Atualizar(Funcionario funcionario)//Método para atualizar funcionário no banco de dados
         {
             try
@@ -147,6 +161,53 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     return funcionarios;
                 }
             }
+        }
+
+        public Funcionario ObterUsuarioeSenha(string usuario, string senha)
+        {
+            Funcionario funcionario = null;
+            string senhaHash = GerarHashSenhaUtils.GerarHash(senha);
+            MessageBox.Show(senhaHash);
+
+            try
+            {
+                using (MySqlConnection conn = Conexao.ObterConexao())
+                {
+                    EnderecoDAO enderecoDAO = new EnderecoDAO();
+                    string sql = "SELECT * FROM funcionarios WHERE usuario = @usuario AND senha_hash = @senha_hash";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@usuario", usuario);
+                    cmd.Parameters.AddWithValue("@senha_hash", senhaHash);
+                    conn.Open();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read()) // precisa chamar Read primeiro
+                        {
+                            int idxEndereco = reader.GetOrdinal("id_endereco");
+                            Endereco endereco = reader.IsDBNull(idxEndereco)
+                                ? null
+                                : enderecoDAO.BuscarPorCodigo(reader.GetInt32(idxEndereco));
+
+                            funcionario = new Funcionario
+                            {
+                                IdFuncionario = reader.GetInt32("id_funcionario"),
+                                Nome = reader.GetString("nome"),
+                                Cargo = reader.GetString("cargo"),
+                                Usuario = reader.GetString("usuario"),
+                                SenhaHash = reader.GetString("senha_hash"),
+                                Endereco = endereco
+                            };
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return funcionario;
         }
     }
 }

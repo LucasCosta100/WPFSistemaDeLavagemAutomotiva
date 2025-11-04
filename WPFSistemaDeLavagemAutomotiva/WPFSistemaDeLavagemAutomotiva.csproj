@@ -121,14 +121,19 @@
     </ApplicationDefinition>
     <Compile Include="Controller\AgendamentosController.cs" />
     <Compile Include="Controller\ClienteController.cs" />
+    <Compile Include="Controller\FuncionarioController.cs" />
     <Compile Include="Controller\ServicoController.cs" />
     <Compile Include="Converters\TimeSpanParaStringConversor.cs" />
     <Compile Include="Service\AgendamentoService.cs" />
     <Compile Include="Service\EnderecoService.cs" />
     <Compile Include="Service\FuncionarioService.cs" />
     <Compile Include="Service\ServicoService.cs" />
+    <Compile Include="Utils\GerarHashSenhaUtils.cs" />
     <Compile Include="View\AgendamentosView.xaml.cs">
       <DependentUpon>AgendamentosView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CadastroWindow.xaml.cs">
+      <DependentUpon>CadastroWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ClientesView.xaml.cs">
       <DependentUpon>ClientesView.xaml</DependentUpon>
@@ -143,8 +148,14 @@
     <Compile Include="View\EditarFuncionariosView.xaml.cs">
       <DependentUpon>EditarFuncionariosView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditarServicosView.xaml.cs">
+      <DependentUpon>EditarServicosView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\FuncionariosView.xaml.cs">
       <DependentUpon>FuncionariosView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ServicosView.xaml.cs">
       <DependentUpon>ServicosView.xaml</DependentUpon>
@@ -193,6 +204,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\CadastroWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ClientesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -209,7 +224,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\EditarServicosView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\FuncionariosView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

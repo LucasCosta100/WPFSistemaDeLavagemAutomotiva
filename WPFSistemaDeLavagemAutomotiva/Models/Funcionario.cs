@@ -43,17 +43,33 @@ namespace WPFSistemaDeLavagemAutomotiva.Models
             set { _endereco = value; }
         }
 
+        private string _usuario;
+        public string Usuario
+        {
+            get { return _usuario; }
+            set { _usuario = value; }
+        }
+
+        private string _senhaHash;
+        public string SenhaHash
+        {
+            get { return _senhaHash; }
+            set { _senhaHash = value; }
+        }
+
         public Funcionario() //Construtor Padrão
         {
         }
 
-        public Funcionario(int idFuncionario, string nome, string cargo, bool ativo, Endereco endereco)
+        public Funcionario(int idFuncionario, string nome, string cargo, bool ativo, Endereco endereco, string usuario, string senhaHash)
         {   //Construtor com parâmetros
             this._idFuncionario = idFuncionario;
             this._nome = nome;
             this._cargo = cargo;
             this._ativo = ativo;
             this._endereco = endereco;
+            this._usuario = usuario;
+            this._senhaHash = senhaHash;
         }
     }
 }

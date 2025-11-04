@@ -19,8 +19,8 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                 {
                     string sql = "INSERT INTO servicos (id_servico, servico, valor, ativo) VALUES (@id, @servico, @valor, @ativo)";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);//Comando SQL para inserir os dados do serviço
-                    cmd.Parameters.AddWithValue("@nome", servico.NomeServico);
-                    cmd.Parameters.AddWithValue("@descricao", servico.Valor);
+                    cmd.Parameters.AddWithValue("@servico", servico.NomeServico);
+                    cmd.Parameters.AddWithValue("@valor", Math.Round(servico.Valor, 2));
                     cmd.Parameters.AddWithValue("@ativo", true);
 
                     conn.Open();
@@ -43,7 +43,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     string sql = "UPDATE servicos SET servico = @servico, valor = @valor, ativo = @ativo WHERE id_servico = @id";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@servico", servico.NomeServico);
-                    cmd.Parameters.AddWithValue("@valor", servico.Valor);
+                    cmd.Parameters.AddWithValue("@valor", Math.Round(servico.Valor, 2));
                     cmd.Parameters.AddWithValue("@id", servico.IdServico);
                     cmd.Parameters.AddWithValue("@ativo", true);
                     conn.Open();

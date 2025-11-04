@@ -20,9 +20,7 @@
                 <Button x:Name="btnAdicionarServico" Grid.Row="0" Content="Adicionar Serviço" Width="150" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Foreground="White" BorderThickness="0" FontSize="14" FontWeight="Bold"/>
             </Border>
             <TextBlock x:Name="tbTotalServicos" Grid.Row="1" Text="Total de Serviços: " FontSize="18" FontWeight="SemiBold" Foreground="#ECEFF1" Margin="10,0,0,0" VerticalAlignment="Center"/>
-            <TextBlock Grid.Row="1" Text="Pesquisar:" FontSize="16" FontWeight="Normal" Foreground="#ECEFF1" Margin="0,0,230,0" HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBox Grid.Row="1" Width="200" Height="30" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Center"/>
-
+            
             <DataGrid x:Name="dgServicos"
                         Grid.Row="2"
                         AutoGenerateColumns="False"
@@ -78,14 +76,14 @@
                     </DataGridTextColumn>
 
                     <DataGridTextColumn Header="Serviços" Binding="{Binding NomeServico}" Width="*"/>
-                    <DataGridTextColumn Header="Valor" Binding="{Binding Valor}" Width="*"/>
+                    <DataGridTextColumn Header="Valor" Binding="{Binding Valor, StringFormat={}{0:F2}}" Width="*" />
                     <DataGridTextColumn Header="Ativo" Binding="{Binding Ativo}" Width="*"/>
                     <DataGridTemplateColumn Header="Ações" Width="120">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="✏️" Background="Yellow"  Width="30" Margin="5 0"/>
-                                    <Button Content="🗑️" Background="Red" Width="30" Margin="5 0"/>
+                                    <Button x:Name="btnEditarServico" Content="✏️" Background="Yellow"  Width="30" Margin="5 0" Tag="{Binding}" Click="btnEditarServico_Click"/>
+                                    <Button x:Name="btnDesativarServico" Content="🗑️" Background="Red" Width="30" Margin="5 0" Tag="{Binding}" Click="btnDesativarServico_Click"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

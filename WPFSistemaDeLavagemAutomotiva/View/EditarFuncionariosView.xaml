@@ -5,8 +5,155 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFSistemaDeLavagemAutomotiva.View"
         mc:Ignorable="d"
-        Title="EditarFuncionariosView" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="EditarFuncionariosView"
+        Height="550"
+        Width="400"
+        Background="#F5F5F5"
+        FontFamily="Segoe UI"
+        WindowStartupLocation="CenterScreen"
+        >
+
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
+
+        <!-- Título -->
+        <TextBlock Text="Editar Cliente"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Foreground="#333333"
+                   Margin="0,0,0,20"
+                   HorizontalAlignment="Center"/>
+
+
+        <!-- Nome -->
+        <TextBlock Text="Nome" Foreground="#333333" Margin="0,10,0,2"/>
+        <TextBox x:Name="txtNome" Background="White" Foreground="#333333"
+                 BorderBrush="#CCCCCC" BorderThickness="1" Padding="5" Text="{Binding Nome}"/>
+
+        <!-- Email -->
+        <TextBlock Text="Cargo" Foreground="#333333" Margin="0,10,0,2"/>
+        <TextBox x:Name="txtCargo" Background="White" Foreground="#333333"
+         BorderBrush="#CCCCCC" BorderThickness="1" Padding="5" Text="{Binding Cargo}"/>
+
+
+
+        <!-- Endereço -->
+        <Grid Margin="0,10,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- CEP -->
+                <RowDefinition Height="Auto"/>
+                <!-- Rua / Número -->
+                <RowDefinition Height="Auto"/>
+                <!-- Complemento / Bairro -->
+                <RowDefinition Height="Auto"/>
+                <!-- Cidade / Estado -->
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- CEP -->
+            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Left">
+                <TextBlock Text="CEP" Foreground="#333333" Margin="0,0,0,2"/>
+                <TextBox x:Name="txtCEP"
+                         Background="White" Foreground="#333333"
+                         BorderBrush="#CCCCCC" BorderThickness="1" Padding="5"
+                         Width="200"
+                         Text="{Binding Endereco.Cep}" />
+            </StackPanel>
+
+            <!-- Rua -->
+            <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,10,0,0">
+                <TextBlock Text="Rua" Foreground="#333333" Margin="0,0,0,2"/>
+                <TextBox x:Name="txtRua"
+     Background="White" Foreground="#333333"
+     BorderBrush="#CCCCCC" BorderThickness="1" Padding="5"
+     Text="{Binding Endereco.Rua}" />
+            </StackPanel>
+
+            <!-- Número -->
+            <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,10,0,0">
+                <TextBlock Text="Número" Foreground="#333333" Margin="0,0,0,2"/>
+                <TextBox x:Name="txtNumero"
+                         Background="White" Foreground="#333333"
+                         BorderBrush="#CCCCCC" BorderThickness="1" Padding="5"
+                         Text="{Binding Endereco.Numero}" />
+            </StackPanel>
+
+            <!-- Complemento -->
+            <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,10,0,0">
+                <TextBlock Text="Complemento" Foreground="#333333" Margin="0,0,0,2"/>
+                <TextBox x:Name="txtComplemento"
+                         Background="White" Foreground="#333333"
+                         BorderBrush="#CCCCCC" BorderThickness="1" Padding="5"
+                         Text="{Binding Endereco.Complemento}" />
+            </StackPanel>
+
+            <!-- Bairro -->
+            <StackPanel Grid.Row="2" Grid.Column="2" Margin="0,10,0,0">
+                <TextBlock Text="Bairro" Foreground="#333333" Margin="0,0,0,2"/>
+                <TextBox x:Name="txtBairro"
+                         Background="White" Foreground="#333333"
+                         BorderBrush="#CCCCCC" BorderThickness="1" Padding="5"
+                         Text="{Binding Endereco.Bairro}" />
+            </StackPanel>
+
+            <!-- Cidade -->
+            <StackPanel Grid.Row="3" Grid.Column="0" Margin="0,10,0,0">
+                <TextBlock Text="Cidade" Foreground="#333333" Margin="0,0,0,2"/>
+                <TextBox x:Name="txtCidade"
+                         Background="White" Foreground="#333333"
+                         BorderBrush="#CCCCCC" BorderThickness="1" Padding="5"
+                         Text="{Binding Endereco.Cidade}" />
+            </StackPanel>
+
+            <!-- Estado -->
+            <StackPanel Grid.Row="3" Grid.Column="2" Margin="0,10,0,0">
+                <TextBlock Text="Estado" Foreground="#333333" Margin="0,0,0,2"/>
+                <TextBox x:Name="txtEstado"
+                         Background="White" Foreground="#333333"
+                         BorderBrush="#CCCCCC" BorderThickness="1" Padding="5"
+                         Text="{Binding Endereco.Estado}" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Botão Salvar -->
+        <Button x:Name="btnSalvar" 
+                 Content="Salvar"
+                 FontWeight="Bold"
+                 Margin="0,20,0,0"
+                 Padding="10"
+                 Width="200"
+                 Cursor="Hand"
+                 Height="30" Click="btnSalvar_Click" 
+ >
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="#4CAF50"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" 
+                         CornerRadius="8">
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#45A049"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+    </StackPanel>
+
 </Window>

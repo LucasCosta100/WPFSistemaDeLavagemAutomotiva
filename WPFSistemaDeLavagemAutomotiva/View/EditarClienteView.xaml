@@ -153,9 +153,5 @@
                 </Style>
             </Button.Style>
         </Button>
-
     </StackPanel>
-
-    
-
 </Window>
