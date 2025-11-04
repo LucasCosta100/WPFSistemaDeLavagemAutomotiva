@@ -50,7 +50,7 @@ namespace WPFSistemaDeLavagemAutomotiva.View
 
         private void btnDesativarEmAndamento_Click(object sender, RoutedEventArgs e)
         {
-            var resultado = MessageBox.Show("Deseja realmente desativar o agendamento em andamento?", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+            var resultado = MessageBox.Show("Deseja realmente desativar o agendamento em andamento?", "Confirmação", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (resultado == MessageBoxResult.Yes)
             {
                 var botao = sender as Button; //Pega o botão que foi clicado

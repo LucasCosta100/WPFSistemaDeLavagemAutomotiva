@@ -120,6 +120,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controller\AgendamentosController.cs" />
+    <Compile Include="Controller\ClienteController.cs" />
     <Compile Include="Controller\ServicoController.cs" />
     <Compile Include="Converters\TimeSpanParaStringConversor.cs" />
     <Compile Include="Service\AgendamentoService.cs" />
@@ -135,6 +136,12 @@
     <Compile Include="View\Components\NavButton.cs" />
     <Compile Include="View\EditarAgendamentoView.xaml.cs">
       <DependentUpon>EditarAgendamentoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditarClienteView.xaml.cs">
+      <DependentUpon>EditarClienteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditarFuncionariosView.xaml.cs">
+      <DependentUpon>EditarFuncionariosView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FuncionariosView.xaml.cs">
       <DependentUpon>FuncionariosView.xaml</DependentUpon>
@@ -191,6 +198,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EditarAgendamentoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditarClienteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditarFuncionariosView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

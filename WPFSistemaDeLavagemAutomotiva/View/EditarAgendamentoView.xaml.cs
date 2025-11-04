@@ -53,7 +53,16 @@ namespace WPFSistemaDeLavagemAutomotiva.View
             TimeSpan horaAgendada = TimeSpan.Parse(horaTexto);
             ComboBoxItem selecionado = cbStatus.SelectedItem as ComboBoxItem; //Pega o status selecionado no ComboBox de status e transformo em string
             string statusServico = selecionado?.Content.ToString();
-            Double valorTotal = Convert.ToDouble(txtValor.Text);
+            double valorTotal;
+            bool sucesso = double.TryParse(txtValor.Text, out valorTotal); // Verificação do valor digitado
+
+            if (!sucesso)
+            {
+                MessageBox.Show("Digite um valor numérico válido.", "Erro", MessageBoxButton.OK, MessageBoxImage.Warning);
+                txtValor.Text = string.Empty;
+                txtValor.Focus();
+                return;
+            }
 
             _agendamento.ServicoAgendado = servicoSelecionado;
             _agendamento.ClienteAgendado = cliente;
