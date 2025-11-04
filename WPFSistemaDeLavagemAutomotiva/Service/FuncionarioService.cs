@@ -1,8 +1,10 @@
-﻿using System;
+﻿using MySqlX.XDevAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WPFSistemaDeLavagemAutomotiva.DAO;
 using WPFSistemaDeLavagemAutomotiva.Models;
 
@@ -17,16 +19,25 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             _funcionarioDAO = new FuncionarioDAO();
         }
 
-        public void SalvarFuncionario(Funcionario funcionario)//Método para salvar funcionário com validações
+        public void CadastrarFuncionario(Funcionario func)
         {
-            //Validações básicas usando o try e catch
-            if (string.IsNullOrWhiteSpace(funcionario.Nome))
-                throw new ArgumentException("O nome do funcionário não pode estar vazio.");
-            if (string.IsNullOrWhiteSpace(funcionario.Cargo))
-                throw new ArgumentException("O cargo do funcionário não pode estar vazio.");
-            if(string.IsNullOrEmpty(funcionario.Endereco.Rua) || string.IsNullOrEmpty(funcionario.Endereco.Cidade) || string.IsNullOrEmpty(funcionario.Endereco.Estado))
-                throw new Exception("Endereço incompleto. Rua, cidade e estado são obrigatórios.");
-            _funcionarioDAO.Salvar(funcionario);
+            if (string.IsNullOrWhiteSpace(func.Nome))
+                throw new ArgumentException("O nome do funcionário é obrigatório.");
+
+            if (string.IsNullOrWhiteSpace(func.Usuario))
+                throw new ArgumentException("O usuário é obrigatório.");
+
+            if (string.IsNullOrWhiteSpace(func.SenhaHash))
+                throw new ArgumentException("A senha é obrigatória.");
+
+            try
+            {
+                _funcionarioDAO.Salvar(func);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public void AtualizarFuncionario(Funcionario funcionario)//Método para atualizar funcionário com validações
@@ -42,15 +53,13 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
 
         public void DesativarFuncionario(Funcionario funcionario)//Método para desativar funcionário com validações
         {
-            var funcionarioExistente = _funcionarioDAO.BuscarPorCodigo(funcionario.IdFuncionario);
-
-            if (!funcionario.Ativo)
-                throw new Exception("Funcionário já está inativo.");
+            if (funcionario == null)
+                throw new Exception("Cliente não encontrado.");
+            if (funcionario.Ativo == false)
+                throw new Exception("O cliente já está inativo.");
             funcionario.Ativo = false;
-            if (funcionarioExistente == null)
-                throw new Exception("Funcionário não encontrado.");
 
-            _funcionarioDAO.Atualizar(funcionario);
+            _funcionarioDAO.Desativar(funcionario);
         }
 
         public void AtivarFuncionario(Funcionario funcionario)//Método para ativar funcionário com validações
@@ -82,6 +91,15 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
                 throw new Exception("Nenhum funcionário ativo encontrado.");
 
             return _funcionarioDAO.BuscarTodos().Where(c => c.Ativo).ToList(); //Retorna apenas clientes ativos
+        }
+
+        public Funcionario ValidarLogin(string usuario, string senhaHash)
+        {
+             // Validação de login
+            if (string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(senhaHash))
+                throw new ArgumentException("Usuário e senha são obrigatórios.");
+
+            return _funcionarioDAO.ObterUsuarioeSenha(usuario, senhaHash);
         }
     }
 }

@@ -10,14 +10,18 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
 {
     public class EnderecoDAO : IEnderecoDAO //Implementação da interface IEnderecoDAO
     {
-        public void Salvar(Endereco endereco)//Método para salvar endereco no banco de dados
+        public int Salvar(Endereco endereco) // Método para salvar endereço no banco de dados
         {
             try
             {
-                using (MySqlConnection conn = Conexao.ObterConexao())//Usa a conexão com o banco de dados
+                using (MySqlConnection conn = Conexao.ObterConexao())
                 {
-                    string sql = "INSERT INTO enderecos (rua, numero, complemento, bairro, cidade, estado, cep) VALUES (@rua, @numero, @complemento, @bairro, @cidade, @estado, @cep)";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);//Comando SQL para inserir os dados do endereco
+                    string sql = @"
+                INSERT INTO enderecos (rua, numero, complemento, bairro, cidade, estado, cep) 
+                VALUES (@rua, @numero, @complemento, @bairro, @cidade, @estado, @cep);
+                SELECT LAST_INSERT_ID();"; // retorna o id gerado
+
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@rua", endereco.Rua);
                     cmd.Parameters.AddWithValue("@numero", endereco.Numero);
                     cmd.Parameters.AddWithValue("@complemento", endereco.Complemento);
@@ -25,13 +29,15 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
                     cmd.Parameters.AddWithValue("@cidade", endereco.Cidade);
                     cmd.Parameters.AddWithValue("@estado", endereco.Estado);
                     cmd.Parameters.AddWithValue("@cep", endereco.Cep);
+
                     conn.Open();
-                    cmd.ExecuteNonQuery();//Executa o comando SQL
+                    int idGerado = Convert.ToInt32(cmd.ExecuteScalar()); // retorna o id do endereço
+                    return idGerado;
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao salvar endereco: " + ex.Message);//Tratamento de erro
+                throw new Exception("Erro ao salvar o endereço");
             }
         }
 

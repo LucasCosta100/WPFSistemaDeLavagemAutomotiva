@@ -74,7 +74,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
 
             agendamento.Ativo = false;
             agendamento.StatusServico = "Cancelado";
-            _agendamentoDAO.Atualizar(agendamento);
+            _agendamentoDAO.Desativar(agendamento);
         }
 
         public void AtivarAgendamento(Agendamento agendamento)//Método para ativar agendamento com validações

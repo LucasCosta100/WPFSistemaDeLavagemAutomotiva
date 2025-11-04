@@ -36,7 +36,7 @@ namespace WPFSistemaDeLavagemAutomotiva.View
 
         public void CarregarServicos()
         {
-            var listarServicos = _servicoController.ListarServicos();
+            var (sucesso,listarServicos, mensagem) = _servicoController.ListarServicos();
             cbServicos.Items.Clear();
             cbServicos.ItemsSource = listarServicos;
             cbServicos.DisplayMemberPath = "NomeServico";         // Mostra o nome

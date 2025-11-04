@@ -1,0 +1,183 @@
+﻿<Window x:Class="WPFSistemaDeLavagemAutomotiva.View.CadastroWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFSistemaDeLavagemAutomotiva.View"
+        mc:Ignorable="d"
+        Title="CadastroWindow" Height="730" Width="400" Background="#1C1C1C" Foreground="White"
+        WindowStartupLocation="CenterScreen">
+
+    <StackPanel Height="Auto">
+        <TextBlock Text="Cadastrar" FontSize="30" Margin="15,15,15,75" Foreground="White" HorizontalAlignment="Center" FontWeight="Bold"></TextBlock>
+        <StackPanel Height="555">
+            <TextBlock Text="Usuário" Foreground="White" Margin="15,10,0,2"/>
+            <TextBox x:Name="txtUsuario" Height="25" Background="#1C1C1C" Foreground="White"  Margin="15,0,15,15"/>
+
+            <TextBlock Text="Nome" Foreground="White" Margin="15,10,0,2"/>
+            <TextBox x:Name="txtNome" Height="25" Background="#1C1C1C" Foreground="White"  Margin="15,0,15,15" />
+
+            <TextBlock Text="Cargo" Foreground="White" Margin="15,10,0,2"/>
+                <TextBox x:Name="txtCargo" Height="25" Background="#1C1C1C" Foreground="White"  Margin="15,0,15,15"/>
+
+            <TextBlock Text="Senha" Foreground="White" Margin="15,10,0,2"/>
+            <PasswordBox x:Name="txtSenha" Height="25" Background="#1C1C1C" Foreground="White" Margin="15,0,15,15"/>
+
+            <!-- Endereço -->
+            <Grid Margin="0,10,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- CEP -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Rua / Número -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Complemento / Bairro -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Cidade / Estado -->
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- CEP -->
+                <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="15,0,0,0">
+                    <TextBlock Text="CEP" Foreground="White" Margin="0,0,0,2" Background="#1C1C1C"/>
+                    <TextBox x:Name="txtCEP"
+                    Background="#1C1C1C" Foreground="White"
+                    BorderBrush="#CCCCCC" BorderThickness="1" Padding="5"
+                    Width="180" 
+                    Text="" />
+                </StackPanel>
+
+                <!-- Rua -->
+                <StackPanel Grid.Row="1" Grid.Column="0" Margin="15,10,0,0">
+                    <TextBlock Text="Rua" Foreground="White" Margin="0,0,0,2"/>
+                    <TextBox x:Name="txtRua"
+                    Background="#1C1C1C" Foreground="White"
+                    BorderBrush="#CCCCCC" BorderThickness="1" Padding="5"
+                    Text="" />
+                </StackPanel>
+
+                <!-- Número -->
+                <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,10,15,0">
+                    <TextBlock Text="Número" Foreground="White" Margin="0,0,0,2"/>
+                    <TextBox x:Name="txtNumero"
+                    Background="#1C1C1C" Foreground="White"
+                    BorderBrush="#CCCCCC" BorderThickness="1" Padding="5"
+                    Text="" />
+                </StackPanel>
+
+                <!-- Complemento -->
+                <StackPanel Grid.Row="2" Grid.Column="0" Margin="15,10,0,0">
+                    <TextBlock Text="Complemento" Foreground="White" Margin="0,0,0,2"/>
+                    <TextBox x:Name="txtComplemento"
+                    Background="#1C1C1C" Foreground="White"
+                    BorderBrush="#CCCCCC" BorderThickness="1" Padding="5"
+                    Text="" />
+                </StackPanel>
+
+                <!-- Bairro -->
+                <StackPanel Grid.Row="2" Grid.Column="2" Margin="0,10,15,0">
+                    <TextBlock Text="Bairro" Foreground="White" Margin="0,0,0,2"/>
+                    <TextBox x:Name="txtBairro"
+                    Background="#1C1C1C" Foreground="White"
+                    BorderBrush="#CCCCCC" BorderThickness="1" Padding="5"
+                    Text="" />
+                </StackPanel>
+
+                <!-- Cidade -->
+                <StackPanel Grid.Row="3" Grid.Column="0" Margin="15,10,0,0">
+                    <TextBlock Text="Cidade" Foreground="White" Margin="0,0,0,2"/>
+                    <TextBox x:Name="txtCidade"
+                    Background="#1C1C1C" Foreground="White"
+                    BorderBrush="#CCCCCC" BorderThickness="1" Padding="5"
+                    Text="" />
+                </StackPanel>
+
+                <!-- Estado -->
+                <StackPanel Grid.Row="3" Grid.Column="2" Margin="0,10,15,0">
+                    <TextBlock Text="Estado" Foreground="White" Margin="0,0,0,2"/>
+                    <TextBox x:Name="txtEstado"
+                    Background="#1C1C1C" Foreground="White"
+                    BorderBrush="#CCCCCC" BorderThickness="1" Padding="5"
+                    Text="" />
+                </StackPanel>
+            </Grid>
+
+            <!-- Botão Cadastrar -->
+            <Button x:Name="btnCadastrar" 
+                Content="Cadastrar"
+                FontWeight="Bold"
+                Margin="0,20,0,30"
+                Padding="10"
+                Width="200"
+                Cursor="Hand"
+                Height="30" Click="btnCadastrar_Click_1"  
+>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#4CAF50"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="8">
+                                        <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#45A049"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <TextBlock Text="Ja possui conta?" Foreground="White" FontWeight="SemiBold" Margin="0,25,0,2" HorizontalAlignment="Center"/>
+
+            <Button x:Name="btnEntrar" 
+                Content="Entrar"
+                FontWeight="SemiBold"
+                Margin="0,0,0,0"
+                Padding="10"
+                FontSize="10"
+                Width="110"
+                Cursor="Hand"
+                Height="25" Click="btnEntrar_Click_1"  
+>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="OrangeRed"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="8">
+                                        <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#45A049"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+        </StackPanel>
+    </StackPanel>
+
+</Window>

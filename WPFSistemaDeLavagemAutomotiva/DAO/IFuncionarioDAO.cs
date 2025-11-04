@@ -14,5 +14,7 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
         void Desativar(Funcionario funcionario);
         Funcionario BuscarPorCodigo(int _idFuncionario);
         List<Funcionario> BuscarTodos();
+
+        Funcionario ObterUsuarioeSenha(string usuario, string senha);
     }
 }

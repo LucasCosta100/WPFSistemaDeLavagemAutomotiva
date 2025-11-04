@@ -14,81 +14,87 @@ namespace WPFSistemaDeLavagemAutomotiva.Controller
             _servicoService = new ServicoService();
         }
 
-        // Salvar um novo serviço
-        public void SalvarServico(Servico servico)
+        // ✅ Salvar um novo serviço
+        public (bool sucesso, string mensagem) SalvarServico(Servico servico)
         {
             try
             {
                 _servicoService.SalvarServico(servico);
+                return (true, "Serviço salvo com sucesso!");
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erro ao salvar serviço: {ex.Message}");
+                return (false, $"Erro ao salvar serviço: {ex.Message}");
             }
         }
 
-        // Atualizar um serviço existente
-        public void AtualizarServico(Servico servico)
+        // ✅ Atualizar serviço existente
+        public (bool sucesso, string mensagem) AtualizarServico(Servico servico)
         {
             try
             {
                 _servicoService.AtualizarServico(servico);
+                return (true, "Serviço atualizado com sucesso!");
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erro ao atualizar serviço: {ex.Message}");
+                return (false, $"Erro ao atualizar serviço: {ex.Message}");
             }
         }
 
-        // Desativar serviço
-        public void DesativarServico(Servico servico)
+        // ✅ Desativar serviço
+        public (bool sucesso, string mensagem) DesativarServico(Servico servico)
         {
             try
             {
                 _servicoService.DesativarServico(servico);
+                return (true, "Serviço desativado com sucesso!");
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erro ao desativar serviço: {ex.Message}");
+                return (false, $"Erro ao desativar serviço: {ex.Message}");
             }
         }
 
-        // Ativar serviço
-        public void AtivarServico(Servico servico)
+        // ✅ Ativar serviço
+        public (bool sucesso, string mensagem) AtivarServico(Servico servico)
         {
             try
             {
                 _servicoService.AtivarServico(servico);
+                return (true, "Serviço ativado com sucesso!");
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erro ao ativar serviço: {ex.Message}");
+                return (false, $"Erro ao ativar serviço: {ex.Message}");
             }
         }
 
-        // Buscar serviço por ID
-        public Servico BuscarPorCodigo(int idServico)
+        // ✅ Buscar serviço por código
+        public (bool sucesso, Servico servico, string mensagem) BuscarPorCodigo(int idServico)
         {
             try
             {
-                return _servicoService.BuscarPorCodigo(idServico);
+                var servico = _servicoService.BuscarPorCodigo(idServico);
+                return (true, servico, "Serviço encontrado com sucesso!");
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erro ao buscar serviço: {ex.Message}");
+                return (false, null, $"Erro ao buscar serviço: {ex.Message}");
             }
         }
 
-        // Listar todos os serviços ativos
-        public List<Servico> ListarServicos()
+        // ✅ Listar todos os serviços ativos
+        public (bool sucesso, List<Servico> servicos, string mensagem) ListarServicos()
         {
             try
             {
-                return _servicoService.ListarServicos();
+                var lista = _servicoService.ListarServicos();
+                return (true, lista, "Serviços carregados com sucesso!");
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erro ao listar serviços: {ex.Message}");
+                return (false, new List<Servico>(), $"Erro ao listar serviços: {ex.Message}");
             }
         }
     }

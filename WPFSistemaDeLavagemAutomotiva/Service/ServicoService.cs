@@ -44,7 +44,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Service
             servico.Ativo = false;
             if (servicoExistente == null)
                 throw new Exception("Serviço não encontrado.");
-            _servicoDAO.Atualizar(servico);
+            _servicoDAO.Desativar(servico);
         }
 
         public void AtivarServico(Servico servico)
