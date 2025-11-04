@@ -8,9 +8,9 @@
       d:DesignHeight="768" d:DesignWidth="1080"
       Title="LoginView">
 
-    <Border Background="#eff2f7" CornerRadius="20">
+    <Border Background="#1c1c1c" CornerRadius="20">
         <Grid>
-            <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" Text="Início" VerticalAlignment="Center" Width="181" FontSize="72" Foreground="Red" BorderBrush="White"/>
+            <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" Text="Login" VerticalAlignment="Center" Width="191" FontSize="72" Foreground="#FFECEFF1" BorderBrush="#FF1C1C1C" Background="#FF1C1C1C"/>
 
         </Grid>
     </Border>

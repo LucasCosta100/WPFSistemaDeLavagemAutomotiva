@@ -5,12 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WPFSistemaDeLavagemAutomotiva.View"
       mc:Ignorable="d" 
-      d:DesignHeight="768" d:DesignWidth="1080"
+      d:DesignHeight="1080" d:DesignWidth="1920"
       Title="InicioView">
 
-    <Border Background="#eff2f7" CornerRadius="20">
+    <Border Background="#1C1C1C" CornerRadius="20">
         <Grid>
-            <TextBox HorizontalAlignment="Left" Margin="150,121,0,0" TextWrapping="Wrap" Text="Bem-vindo ao Sistema de Lavagem Automotiva" VerticalAlignment="Top" Width="1080" Height="181" FontSize="36" FontWeight="Bold"/>
+            <TextBox HorizontalAlignment="Center" Margin="0,125,0,0" TextWrapping="Wrap" Text="Bem-vindo ao Sistema de Lavagem Automotiva" VerticalAlignment="Top" Width="1084" Height="82" FontSize="48" FontWeight="Bold" Foreground="#FFECEFF1" BorderBrush="#FF1C1C1C" Background="#FF1C1C1C"/>
+            <Image Margin="284,212,284,68" Source="/depositphotos_5601187-stock-illustration-car-wash-removebg-preview.png" Stretch="Fill"/>
         </Grid>
     </Border>
 </Page>

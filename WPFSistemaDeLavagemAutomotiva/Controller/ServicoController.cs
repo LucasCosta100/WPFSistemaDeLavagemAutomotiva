@@ -19,7 +19,7 @@ namespace WPFSistemaDeLavagemAutomotiva.Controller
         {
             try
             {
-                _servicoService.SalvarServico(servico);
+                _servicoService.SalvarServicos(servico);
             }
             catch (Exception ex)
             {
