@@ -167,7 +167,6 @@ namespace WPFSistemaDeLavagemAutomotiva.DAO
         {
             Funcionario funcionario = null;
             string senhaHash = GerarHashSenhaUtils.GerarHash(senha);
-            MessageBox.Show(senhaHash);
 
             try
             {
