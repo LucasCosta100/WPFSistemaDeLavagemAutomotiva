@@ -8,7 +8,8 @@
         WindowStyle="SingleBorderWindow"
         Title="MainWindow"           
         ResizeMode="NoResize"
-        Background="#121212">
+        Background="#121212"
+        WindowStartupLocation="CenterScreen">
     <Grid Background="#121212">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
